@@ -14,13 +14,13 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Jabatan.init({
-    id: DataTypes.STRING,
     nama_jabatan: DataTypes.STRING,
     biaya_jabatan: DataTypes.INTEGER,
     id_divisi: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Jabatan',
+    tableName: 'tjabatan',
   });
   return Jabatan;
 };

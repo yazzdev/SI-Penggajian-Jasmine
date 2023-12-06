@@ -14,11 +14,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Divisi.init({
-    id: DataTypes.STRING,
     nama_divisi: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Divisi',
+    tableName: 'tdivisi',
   });
   return Divisi;
 };

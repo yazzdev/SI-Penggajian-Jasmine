@@ -14,7 +14,6 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Potongan.init({
-    id: DataTypes.STRING,
     makan: DataTypes.INTEGER,
     zakat: DataTypes.INTEGER,
     absensi: DataTypes.INTEGER,
@@ -24,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Potongan',
+    tableName: 'tpotongan',
   });
   return Potongan;
 };

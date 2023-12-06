@@ -14,7 +14,6 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Penggajian.init({
-    id: DataTypes.STRING,
     total_gaji: DataTypes.INTEGER,
     id_tunjangan: DataTypes.STRING,
     id_jabatan: DataTypes.STRING,
@@ -24,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Penggajian',
+    tableName: 'tpenggajian',
   });
   return Penggajian;
 };
