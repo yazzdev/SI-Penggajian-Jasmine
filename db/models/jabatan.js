@@ -4,13 +4,25 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Jabatan extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+
     static associate(models) {
-      // define association here
+      // Jabatan belongs to Divisi (N to 1 relationship)
+      Jabatan.belongsTo(models.Divisi, {
+        foreignKey: 'id_divisi',
+        as: 'divisi',
+      });
+
+      // Jabatan has many Pegawai (1 to N relationship)
+      Jabatan.hasMany(models.Pegawai, {
+        foreignKey: 'id_jabatan',
+        as: 'pegawai',
+      });
+
+      // Jabatan has many Penggajian (1 to N relationship)
+      Jabatan.hasMany(models.Penggajian, {
+        foreignKey: 'id_jabatan',
+        as: 'penggajian',
+      });
     }
   }
   Jabatan.init({
