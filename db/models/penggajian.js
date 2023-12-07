@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       // Penggajian belongs to Pegawai (N to 1 relationship)
       Penggajian.belongsTo(models.Pegawai, {
         foreignKey: 'nip_pegawai',
-        targetKey: 'nip_pegawai',
+        targetKey: 'nip',
         as: 'pegawai',
       });
 
@@ -34,9 +34,9 @@ module.exports = (sequelize, DataTypes) => {
   }
   Penggajian.init({
     total_gaji: DataTypes.INTEGER,
-    id_tunjangan: DataTypes.STRING,
-    id_jabatan: DataTypes.STRING,
-    id_potongan: DataTypes.STRING,
+    id_tunjangan: DataTypes.INTEGER,
+    id_jabatan: DataTypes.INTEGER,
+    id_potongan: DataTypes.INTEGER,
     nip_pegawai: DataTypes.STRING,
     take_home_pay: DataTypes.INTEGER
   }, {

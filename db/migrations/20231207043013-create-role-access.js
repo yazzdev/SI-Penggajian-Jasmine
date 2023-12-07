@@ -2,45 +2,30 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('tpegawai', {
+    await queryInterface.createTable('RoleAccesses', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      nip: {
-        type: Sequelize.STRING
-      },
-      password: {
-        type: Sequelize.STRING
-      },
-      nama_pegawai: {
-        type: Sequelize.STRING
-      },
       role_id: {
         type: Sequelize.INTEGER
       },
-      user_type: {
-        type: Sequelize.STRING
-      },
-      tgl_masuk: {
-        type: Sequelize.DATE
-      },
-      gaji_pokok: {
+      module_id: {
         type: Sequelize.INTEGER
       },
-      bank: {
-        type: Sequelize.STRING
+      is_read: {
+        type: Sequelize.BOOLEAN
       },
-      no_rekening: {
-        type: Sequelize.STRING
+      is_write: {
+        type: Sequelize.BOOLEAN
       },
-      profilePicture: {
-        type: Sequelize.STRING
+      is_update: {
+        type: Sequelize.BOOLEAN
       },
-      id_jabatan: {
-        type: Sequelize.INTEGER
+      is_delete: {
+        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,
@@ -53,6 +38,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('tpegawai');
+    await queryInterface.dropTable('RoleAccesses');
   }
 };

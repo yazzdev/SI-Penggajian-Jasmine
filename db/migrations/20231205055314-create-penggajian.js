@@ -13,13 +13,13 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       id_tunjangan: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       id_jabatan: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       id_potongan: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       nip_pegawai: {
         type: Sequelize.STRING
