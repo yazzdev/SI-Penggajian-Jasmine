@@ -44,10 +44,6 @@ module.exports = {
         id_jabatan
       };
 
-      const rolePegawai = await Role.findOne({ where: { name: 'User' } });
-      if (rolePegawai) {
-        dataPegawai.role_id = rolePegawai.id;
-      }
       const pegawai = await Pegawai.create(dataPegawai);
 
       // Format the date in the desired format (dd-MM-yyyy)
@@ -77,136 +73,136 @@ module.exports = {
     }
   },
 
-  // login: async (req, res) => {
-  //   try {
-  //     const { nip, password } = req.body;
+  login: async (req, res) => {
+    try {
+      const { nip, password } = req.body;
 
-  //     const pegawai = await Pegawai.findOne({ where: { nip } });
-  //     if (!pegawai) {
-  //       return res.status(400).json({
-  //         status: false,
-  //         message: 'credential is not valid!',
-  //         data: null
-  //       });
-  //     }
+      const pegawai = await Pegawai.findOne({ where: { nip } });
+      if (!pegawai) {
+        return res.status(400).json({
+          status: false,
+          message: 'credential is not valid!',
+          data: null
+        });
+      }
 
-  //     const passwordCorrect = await bcrypt.compare(password, pegawai.password);
-  //     if (!passwordCorrect) {
-  //       return res.status(400).json({
-  //         status: false,
-  //         message: 'credential is not valid!',
-  //         data: null
-  //       });
-  //     }
+      const passwordCorrect = await bcrypt.compare(password, pegawai.password);
+      if (!passwordCorrect) {
+        return res.status(400).json({
+          status: false,
+          message: 'credential is not valid!',
+          data: null
+        });
+      }
 
-  //     const payload = {
-  //       id: pegawai.id,
-  //       nip: pegawai.nip,
-  //       nama_pegawai: pegawai.nama_pegawai,
-  //       role_id: pegawai.role_id,
-  //       id_jabatan: pegawai.id_jabatan
-  //     };
+      const payload = {
+        id: pegawai.id,
+        nip: pegawai.nip,
+        nama_pegawai: pegawai.nama_pegawai,
+        role_id: pegawai.role_id,
+        id_jabatan: pegawai.id_jabatan
+      };
 
-  //     const token = await jwt.sign(payload, JWT_SECRET_KEY);
-  //     return res.status(200).json({
-  //       status: true,
-  //       message: 'login success!',
-  //       data: {
-  //         token: token
-  //       }
-  //     });
+      const token = await jwt.sign(payload, JWT_SECRET_KEY);
+      return res.status(200).json({
+        status: true,
+        message: 'login success!',
+        data: {
+          token: token
+        }
+      });
 
-  //   } catch (error) {
-  //     console.error(error);
-  //     return res.status(500).json({
-  //       status: false,
-  //       message: 'Internal Server Error',
-  //       data: null,
-  //     });
-  //   }
-  // },
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({
+        status: false,
+        message: 'Internal Server Error',
+        data: null,
+      });
+    }
+  },
 
-  // whoami: async (req, res) => {
-  //   try {
-  //     return res.status(200).json({
-  //       status: true,
-  //       message: 'fetch pegawai success!',
-  //       data: req.pegawai
-  //     });
-  //   } catch (error) {
-  //     console.error(error);
-  //     return res.status(500).json({
-  //       status: false,
-  //       message: 'Internal Server Error',
-  //       data: null,
-  //     });
-  //   }
-  // },
+  whoami: async (req, res) => {
+    try {
+      return res.status(200).json({
+        status: true,
+        message: 'fetch pegawai success!',
+        data: req.pegawai
+      });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({
+        status: false,
+        message: 'Internal Server Error',
+        data: null,
+      });
+    }
+  },
 
-  // show: async (req, res) => {
-  //   try {
-  //     const pegawai = await Pegawai.findAll();
+  show: async (req, res) => {
+    try {
+      const pegawai = await Pegawai.findAll();
 
-  //     return res.status(200).json({
-  //       status: true,
-  //       message: 'success',
-  //       data: pegawai
-  //     });
-  //   } catch (error) {
-  //     console.error(error);
-  //     return res.status(500).json({
-  //       status: false,
-  //       message: 'Internal Server Error',
-  //       data: null,
-  //     });
-  //   }
-  // },
+      return res.status(200).json({
+        status: true,
+        message: 'success',
+        data: pegawai
+      });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({
+        status: false,
+        message: 'Internal Server Error',
+        data: null,
+      });
+    }
+  },
 
-  // uploadProfile: async (req, res) => {
-  //   try {
-  //     const { id } = req.user;
+  uploadProfile: async (req, res) => {
+    try {
+      const { id } = req.user;
 
-  //     const pegawai = await Pegawai.findByPk(id);
+      const pegawai = await Pegawai.findByPk(id);
 
-  //     if (!pegawai) {
-  //       return res.status(404).json({
-  //         status: false,
-  //         message: 'Pegawai not found!',
-  //         data: null
-  //       });
-  //     }
+      if (!pegawai) {
+        return res.status(404).json({
+          status: false,
+          message: 'Pegawai not found!',
+          data: null
+        });
+      }
 
-  //     if (!req.file) {
-  //       return res.status(400).json({
-  //         status: false,
-  //         message: 'No file uploaded',
-  //         data: null,
-  //       });
-  //     }
+      if (!req.file) {
+        return res.status(400).json({
+          status: false,
+          message: 'No file uploaded',
+          data: null,
+        });
+      }
 
-  //     const stringFile = req.file.buffer.toString('base64');
+      const stringFile = req.file.buffer.toString('base64');
 
-  //     const uploadFile = await imagekit.upload({
-  //       fileName: req.file.originalname,
-  //       file: stringFile
-  //     });
+      const uploadFile = await imagekit.upload({
+        fileName: req.file.originalname,
+        file: stringFile
+      });
 
-  //     // Memperbarui gambar profil pengguna
-  //     pegawai.profilePicture = uploadFile.url;
-  //     await pegawai.save();
+      // Memperbarui gambar profil pengguna
+      pegawai.profilePicture = uploadFile.url;
+      await pegawai.save();
 
-  //     return res.json({
-  //       status: true,
-  //       message: 'Profile picture uploaded successfully',
-  //       data: {
-  //         id: pegawai.id,
-  //         nip: pegawai.nip,
-  //         nama_pegawai: pegawai.nama_pegawai,
-  //         profilePicture: pegawai.profilePicture
-  //       }
-  //     });
-  //   } catch (err) {
-  //     throw err;
-  //   }
-  // }
+      return res.json({
+        status: true,
+        message: 'Profile picture uploaded successfully',
+        data: {
+          id: pegawai.id,
+          nip: pegawai.nip,
+          nama_pegawai: pegawai.nama_pegawai,
+          profilePicture: pegawai.profilePicture
+        }
+      });
+    } catch (err) {
+      throw err;
+    }
+  }
 }

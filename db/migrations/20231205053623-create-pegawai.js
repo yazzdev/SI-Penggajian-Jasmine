@@ -21,9 +21,6 @@ module.exports = {
       role_id: {
         type: Sequelize.INTEGER
       },
-      user_type: {
-        type: Sequelize.STRING
-      },
       tgl_masuk: {
         type: Sequelize.DATE
       },

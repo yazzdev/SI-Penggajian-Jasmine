@@ -15,13 +15,13 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/auth/register', pegawai.register);
-// router.post('/auth/login', pegawai.login);
-// router.get('/auth/whoami', middlewares.auth, pegawai.whoami);
-// router.get('/auth/show', middlewares.auth, middlewares.rbac(enums.rbacModule.authorization, true, false, false, false), pegawai.show);
+router.post('/auth/login', pegawai.login);
+router.get('/auth/whoami', middlewares.auth, pegawai.whoami);
+router.get('/auth/show', middlewares.auth, middlewares.rbac(enums.rbacModule.authorization, true, false, false, false), pegawai.show);
 
 // //* Upload Avatar for pegawai
-// // bisa digunakan untuk upload profile atau update profile, tinggal memasukan gambar baru saja
-// router.post('/auth/upload-profile', middlewares.auth, multer.single('profilePicture'), pegawai.uploadProfile);
+// bisa digunakan untuk upload profile atau update profile, tinggal memasukan gambar baru saja
+router.post('/auth/upload-profile', middlewares.auth, multer.single('profilePicture'), pegawai.uploadProfile);
 
 // // module
 // router.post('/rbac/modules', middlewares.auth, middlewares.rbac(enums.rbacModule.authorization, true, true, false, false), rbac.modules.store);
