@@ -3,36 +3,58 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET_KEY } = process.env;
 const imagekit = require('../utils/imagekit');
-const { format, parse, isValid } = require('date-fns');
+const { parse, isValid } = require('date-fns');
+
+// Fungsi untuk format tanggal
+function formatDate(dateString) {
+  const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+  const formattedDate = new Date(dateString).toLocaleDateString('en-GB', options);
+  return formattedDate;
+}
 
 module.exports = {
+  registerPage: (req, res) => {
+    return res.render('users/register', {
+      errors: {
+        nip: '',
+        password: '',
+        nama_pegawai: '',
+        tgl_masuk: '',
+        bank: '',
+        no_rekening: '',
+        role_id: '',
+        id_jabatan: ''
+      }
+    });
+  },
   register: async (req, res) => {
     try {
       const { nip, password, nama_pegawai, tgl_masuk, bank, no_rekening, role_id, id_jabatan } = req.body;
 
+      const error = { errors: {} };
+      // Check if NIP already exists
       const exist = await Pegawai.findOne({ where: { nip } });
       if (exist) {
-        return res.status(400).json({
-          status: false,
-          message: 'nip already used!',
-          data: null
-        });
+        error.errors.nip = 'NIP is already used!';
+        return res.render('users/register', error);
       }
 
+      // Hash the password
       const hashPassword = await bcrypt.hash(password, 10);
 
-      // Parsing tanggal dengan format dd-MM-yyyy
-      const parsedTglMasuk = parse(tgl_masuk, 'dd-MM-yyyy', new Date());
+      // Parse the date
+      const parsedTglMasuk = parse(tgl_masuk, 'yyyy-MM-dd', new Date());
 
-      // Cek apakah tanggal yang di-parse valid
+      // Check if the parsed date is valid
       if (!isValid(parsedTglMasuk)) {
-        return res.status(400).json({
+        return res.render('users/register', {
           status: false,
-          message: 'Invalid date format for tgl_masuk!',
+          message: 'Invalid date format for Tanggal Masuk!',
           data: null
         });
       }
 
+      // Create Pegawai
       const dataPegawai = {
         nip,
         password: hashPassword,
@@ -44,35 +66,18 @@ module.exports = {
         id_jabatan
       };
 
-      const pegawai = await Pegawai.create(dataPegawai);
+      await Pegawai.create(dataPegawai);
 
-      // Format the date in the desired format (dd-MM-yyyy)
-      const formattedTglMasuk = format(new Date(pegawai.tgl_masuk), 'dd-MM-yyyy');
-
-      return res.status(201).json({
-        status: true,
-        message: 'User created!',
-        data: {
-          id: pegawai.id,
-          nip: pegawai.nip,
-          nama_pegawai: pegawai.nama_pegawai,
-          tgl_masuk: formattedTglMasuk,
-          bank: pegawai.bank,
-          no_rekening: pegawai.no_rekening,
-          role_id: pegawai.role_id,
-          id_jabatan: pegawai.id_jabatan
-        }
-      });
+      return res.redirect('/users/show-all');
     } catch (error) {
       console.error(error);
-      return res.status(500).json({
+      return res.render('users/register', {
         status: false,
         message: 'Internal Server Error',
         data: null,
       });
     }
   },
-
   login: async (req, res) => {
     try {
       const { nip, password } = req.body;
@@ -143,10 +148,18 @@ module.exports = {
     try {
       const pegawai = await Pegawai.findAll();
 
-      return res.status(200).json({
+      // Format tanggal sebelum dikirimkan ke view
+      const formattedPegawai = pegawai.map(user => {
+        return {
+          ...user.toJSON(),
+          tgl_masuk: formatDate(user.tgl_masuk),
+        };
+      });
+
+      res.render('users/show-all', {
         status: true,
         message: 'success',
-        data: pegawai
+        data: formattedPegawai,
       });
     } catch (error) {
       console.error(error);

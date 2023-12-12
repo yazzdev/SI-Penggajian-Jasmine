@@ -1,0 +1,49 @@
+<!-- views/users/register.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+</head>
+
+<body>
+  <h1>Register</h1>
+
+  <form action="/users/register" method="POST">
+    <label for="nip">NIP:</label>
+    <input type="text" name="nip" required>
+    <% if (errors.nip) { %>
+      <span style="color: red">
+        <%= errors.nip %>
+      </span>
+    <% } %>
+    <br>
+    <label for="password">Password:</label>
+    <input type="password" name="password" required>
+    <br>
+    <label for="nama_pegawai">Nama Pegawai:</label>
+    <input type="text" name="nama_pegawai" required>
+    <br>
+    <label for="tgl_masuk">Tanggal Masuk:</label>
+    <input type="date" name="tgl_masuk" required>
+    <br>
+    <label for="bank">Bank:</label>
+    <input type="text" name="bank" required>
+    <br>
+    <label for="no_rekening">Nomor Rekening:</label>
+    <input type="text" name="no_rekening" required>
+    <br>
+    <label for="role_id">Role ID:</label>
+    <input type="text" name="role_id" required>
+    <br>
+    <label for="id_jabatan">ID Jabatan:</label>
+    <input type="text" name="id_jabatan" required>
+    <br>
+    <button type="submit">Register</button>
+  </form>
+</body>
+
+</html>
