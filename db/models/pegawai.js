@@ -18,19 +18,14 @@ module.exports = (sequelize, DataTypes) => {
         sourceKey: 'nip',
         as: 'penggajian',
       });
-
-      Pegawai.belongsTo(models.Role, { foreignKey: 'role_id' });
     }
   }
   Pegawai.init({
     nip: DataTypes.STRING,
-    password: DataTypes.STRING,
     nama_pegawai: DataTypes.STRING,
-    role_id: DataTypes.INTEGER,
     tgl_masuk: DataTypes.DATE,
     bank: DataTypes.STRING,
     no_rekening: DataTypes.STRING,
-    profilePicture: DataTypes.STRING,
     id_jabatan: DataTypes.INTEGER
   }, {
     sequelize,

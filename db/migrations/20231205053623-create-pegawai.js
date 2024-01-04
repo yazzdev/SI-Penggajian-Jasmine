@@ -12,14 +12,8 @@ module.exports = {
       nip: {
         type: Sequelize.STRING
       },
-      password: {
-        type: Sequelize.STRING
-      },
       nama_pegawai: {
         type: Sequelize.STRING
-      },
-      role_id: {
-        type: Sequelize.INTEGER
       },
       tgl_masuk: {
         type: Sequelize.DATE
@@ -31,9 +25,6 @@ module.exports = {
         type: Sequelize.STRING
       },
       no_rekening: {
-        type: Sequelize.STRING
-      },
-      profilePicture: {
         type: Sequelize.STRING
       },
       id_jabatan: {
