@@ -6,6 +6,7 @@ const tunjangan = require('./tunjangan');
 const potongan = require('./potongan');
 const jabatan = require('./jabatan');
 const divisi = require('./divisi');
+const penggajian = require('./penggajian');
 
 router.get('/', (req, res, next) => {
   res.render('index', {
@@ -19,5 +20,6 @@ router.use('/tunjangan', tunjangan);
 router.use('/potongan', potongan);
 router.use('/jabatan', jabatan);
 router.use('/divisi', divisi);
+router.use('/penggajian', penggajian);
 
 module.exports = router;

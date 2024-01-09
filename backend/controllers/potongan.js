@@ -1,4 +1,4 @@
-const { Potongan, Pegawai } = require('../db/models');
+const { Potongan, Pegawai, Penggajian } = require('../db/models');
 
 module.exports = {
   show: async (req, res) => {
@@ -29,15 +29,39 @@ module.exports = {
   update: async (req, res) => {
     try {
       const { id } = req.params;
+      const { makan, zakat, absensi, transport, pinjaman_pegawai, lain_lain } = req.body;
 
-      const updated = await Potongan.update(req.body, { where: { id: id } });
+      const potongan = await Potongan.findOne({where:{id:id}});
 
-      if (updated[0] == 0) {
+      if (!potongan){
         return res.status(404).json({
           status: false,
           message: `Potongan not found!`,
           data: null
         });
+      }
+
+      // Update data potongan
+      potongan.makan = makan || potongan.makan;
+      potongan.zakat = zakat || potongan.zakat;
+      potongan.absensi = absensi || potongan.absensi;
+      potongan.transport = transport || potongan.transport;
+      potongan.pinjaman_pegawai = pinjaman_pegawai || potongan.pinjaman_pegawai;
+      potongan.lain_lain = lain_lain || potongan.lain_lain;
+
+      await potongan.save();
+
+      // Update penggajian terkait
+      const penggajian = await Penggajian.findOne({ where: { nip_pegawai: potongan.nip_pegawai } });
+
+      if (penggajian) {
+        const total_potonganBaru =
+          potongan.makan + potongan.zakat + potongan.absensi + potongan.transport + potongan.pinjaman_pegawai + potongan.lain_lain;
+
+        penggajian.total_potongan = total_potonganBaru;
+        penggajian.take_home_pay = penggajian.total_gaji - total_potonganBaru;
+
+        await penggajian.save();
       }
 
       return res.status(200).json({

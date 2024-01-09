@@ -1,10 +1,10 @@
-const { Pegawai, Jabatan, Potongan, Tunjangan, Divisi } = require('../db/models');
+const { Penggajian, Pegawai, Jabatan, Potongan, Tunjangan, Divisi } = require('../db/models');
 const { parse, isValid, parseISO } = require('date-fns');
 
 module.exports = {
   store: async (req, res) => {
     try {
-      const { nip, nama_pegawai, tgl_masuk, bank, no_rekening, id_jabatan } = req.body;
+      const { nip, nama_pegawai, tgl_masuk, gaji_pokok, bank, no_rekening, id_jabatan } = req.body;
 
       const exist = await Pegawai.findOne({ where: { nip } });
       if (exist) {
@@ -29,6 +29,7 @@ module.exports = {
         nip,
         nama_pegawai,
         tgl_masuk: parsedTglMasuk,
+        gaji_pokok,
         bank,
         no_rekening,
         id_jabatan
@@ -56,6 +57,27 @@ module.exports = {
         nip_pegawai: pegawai.nip
       });
 
+      // Create default penggajian
+      const jabatan = await Jabatan.findByPk(id_jabatan);
+
+      const tunjangan = await Tunjangan.findOne({ where: { nip_pegawai: pegawai.nip } });
+      const potongan = await Potongan.findOne({ where: { nip_pegawai: pegawai.nip } });
+
+      const total_gaji =
+        jabatan.biaya_jabatan + pegawai.gaji_pokok + tunjangan.transport + tunjangan.makan + tunjangan.komunikasi + tunjangan.keahlian;
+
+      const total_potongan =
+        potongan.makan + potongan.zakat + potongan.absensi + potongan.transport + potongan.pinjaman_pegawai + potongan.lain_lain;
+
+      const take_home_pay = total_gaji - total_potongan;
+
+      await Penggajian.create({
+        total_gaji,
+        total_potongan,
+        nip_pegawai: pegawai.nip,
+        take_home_pay
+      });
+
       return res.status(201).json({
         status: true,
         message: 'Success',
@@ -63,6 +85,7 @@ module.exports = {
           nip: pegawai.nip,
           nama_pegawai: pegawai.nama_pegawai,
           tgl_masuk: pegawai.tgl_masuk,
+          gaji_pokok: pegawai.gaji_pokok,
           bank: pegawai.bank,
           no_rekening: pegawai.no_rekening,
           id_jabatan: pegawai.id_jabatan
@@ -112,7 +135,7 @@ module.exports = {
   update: async (req, res) => {
     try {
       const { nip } = req.params;
-      const { nama_pegawai, tgl_masuk, bank, no_rekening, id_jabatan } = req.body;
+      const { nama_pegawai, tgl_masuk, gaji_pokok, bank, no_rekening, id_jabatan } = req.body;
 
       const pegawai = await Pegawai.findOne({ where: { nip } });
 
@@ -137,23 +160,32 @@ module.exports = {
       // Update data pegawai
       pegawai.nama_pegawai = nama_pegawai || pegawai.nama_pegawai;
       pegawai.tgl_masuk = parsedTglMasuk || pegawai.tgl_masuk;
+      pegawai.gaji_pokok = !isNaN(gaji_pokok) ? gaji_pokok : pegawai.gaji_pokok;
       pegawai.bank = bank || pegawai.bank;
       pegawai.no_rekening = no_rekening || pegawai.no_rekening;
       pegawai.id_jabatan = id_jabatan || pegawai.id_jabatan;
 
       await pegawai.save();
 
+      // Update penggajian terkait
+      const penggajian = await Penggajian.findOne({ where: { nip_pegawai: pegawai.nip } });
+      const tunjangan = await Tunjangan.findOne({ where: { nip_pegawai: pegawai.nip } });
+
+      if (penggajian) {
+        const jabatan = await Jabatan.findByPk(pegawai.id_jabatan);
+
+        const total_gaji = jabatan.biaya_jabatan + pegawai.gaji_pokok + tunjangan.transport + tunjangan.makan + tunjangan.komunikasi + tunjangan.keahlian;
+
+        penggajian.total_gaji = total_gaji;
+        penggajian.take_home_pay = total_gaji - penggajian.total_potongan;
+
+        await penggajian.save();
+      }
+
       return res.status(200).json({
         status: true,
         message: 'Update pegawai success!',
-        data: {
-          nip: pegawai.nip,
-          nama_pegawai: pegawai.nama_pegawai,
-          tgl_masuk: pegawai.tgl_masuk,
-          bank: pegawai.bank,
-          no_rekening: pegawai.no_rekening,
-          id_jabatan: pegawai.id_jabatan
-        }
+        data: null
       });
     } catch (error) {
       console.error(error);
@@ -182,6 +214,9 @@ module.exports = {
 
       // Hapus data Potongan terkait
       await Potongan.destroy({ where: { nip_pegawai: pegawai.nip } });
+      
+      // Hapus data Penggajian terkait
+      await Penggajian.destroy({ where: { nip_pegawai: pegawai.nip } });
 
       await pegawai.destroy();
 
