@@ -6,37 +6,19 @@ module.exports = (sequelize, DataTypes) => {
   class Penggajian extends Model {
 
     static associate(models) {
-      // Penggajian belongs to Jabatan (N to 1 relationship)
-      Penggajian.belongsTo(models.Jabatan, {
-        foreignKey: 'id_jabatan',
-        as: 'jabatan',
-      });
-
       // Penggajian belongs to Pegawai (N to 1 relationship)
       Penggajian.belongsTo(models.Pegawai, {
         foreignKey: 'nip_pegawai',
         targetKey: 'nip',
         as: 'pegawai',
-      });
-
-      // Penggajian belongs to Tunjangan (N to 1 relationship)
-      Penggajian.belongsTo(models.Tunjangan, {
-        foreignKey: 'id_tunjangan',
-        as: 'tunjangan',
-      });
-
-      // Penggajian belongs to Potongan (N to 1 relationship)
-      Penggajian.belongsTo(models.Potongan, {
-        foreignKey: 'id_potongan',
-        as: 'potongan',
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       });
     }
   }
   Penggajian.init({
     total_gaji: DataTypes.INTEGER,
-    id_tunjangan: DataTypes.INTEGER,
-    id_jabatan: DataTypes.INTEGER,
-    id_potongan: DataTypes.INTEGER,
+    total_potongan: DataTypes.INTEGER,
     nip_pegawai: DataTypes.STRING,
     take_home_pay: DataTypes.INTEGER
   }, {

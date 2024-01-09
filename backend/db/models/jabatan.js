@@ -10,18 +10,16 @@ module.exports = (sequelize, DataTypes) => {
       Jabatan.belongsTo(models.Divisi, {
         foreignKey: 'id_divisi',
         as: 'divisi',
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       });
 
       // Jabatan has many Pegawai (1 to N relationship)
       Jabatan.hasMany(models.Pegawai, {
         foreignKey: 'id_jabatan',
         as: 'pegawai',
-      });
-
-      // Jabatan has many Penggajian (1 to N relationship)
-      Jabatan.hasMany(models.Penggajian, {
-        foreignKey: 'id_jabatan',
-        as: 'penggajian',
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       });
     }
   }

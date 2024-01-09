@@ -1,4 +1,4 @@
-const { Pegawai, Jabatan, Divisi } = require('../db/models');
+const { Pegawai, Jabatan, Potongan, Tunjangan, Divisi } = require('../db/models');
 const { parse, isValid, parseISO } = require('date-fns');
 
 module.exports = {
@@ -35,6 +35,26 @@ module.exports = {
       };
 
       const pegawai = await Pegawai.create(dataPegawai);
+
+      // Create default tunjangan
+      await Tunjangan.create({
+        transport: 0,
+        makan: 0,
+        komunikasi: 0,
+        keahlian: 0,
+        nip_pegawai: pegawai.nip
+      });
+
+      // Create default potongan
+      await Potongan.create({
+        makan: 0,
+        zakat: 0,
+        absensi: 0,
+        transport: 0,
+        pinjaman_pegawai: 0,
+        lain_lain: 0,
+        nip_pegawai: pegawai.nip
+      });
 
       return res.status(201).json({
         status: true,

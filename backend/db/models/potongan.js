@@ -6,10 +6,13 @@ module.exports = (sequelize, DataTypes) => {
   class Potongan extends Model {
 
     static associate(models) {
-      // Potongan has many Penggajian (1 to N relationship)
-      Potongan.hasMany(models.Penggajian, {
-        foreignKey: 'id_potongan',
-        as: 'penggajian',
+      // Potongan belongs to Pegawai (N to 1 relationship)
+      Potongan.belongsTo(models.Pegawai, {
+        foreignKey: 'nip_pegawai',
+        targetKey: 'nip',
+        as: 'pegawai',
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       });
     }
   }
@@ -19,7 +22,8 @@ module.exports = (sequelize, DataTypes) => {
     absensi: DataTypes.INTEGER,
     transport: DataTypes.INTEGER,
     pinjaman_pegawai: DataTypes.INTEGER,
-    lain_lain: DataTypes.INTEGER
+    lain_lain: DataTypes.INTEGER,
+    nip_pegawai: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Potongan',

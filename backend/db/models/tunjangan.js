@@ -6,17 +6,13 @@ module.exports = (sequelize, DataTypes) => {
   class Tunjangan extends Model {
 
     static associate(models) {
-      // Tunjangan has many Penggajian (1 to N relationship)
-      Tunjangan.hasMany(models.Penggajian, {
-        foreignKey: 'id_tunjangan',
-        as: 'penggajian',
-      });
-
       // Tunjangan belongs to Pegawai (N to 1 relationship)
       Tunjangan.belongsTo(models.Pegawai, {
         foreignKey: 'nip_pegawai',
         targetKey: 'nip',
         as: 'pegawai',
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       });
     }
   }

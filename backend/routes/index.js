@@ -3,6 +3,7 @@ const router = express.Router();
 const admin = require('./admin');
 const pegawai = require('./pegawai');
 const tunjangan = require('./tunjangan');
+const potongan = require('./potongan');
 
 router.get('/', (req, res, next) => {
   res.render('index', {
@@ -13,5 +14,6 @@ router.get('/', (req, res, next) => {
 router.use('/admin', admin);
 router.use('/pegawai', pegawai);
 router.use('/tunjangan', tunjangan);
+router.use('/potongan', potongan);
 
 module.exports = router;

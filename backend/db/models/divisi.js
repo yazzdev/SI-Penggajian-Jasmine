@@ -10,6 +10,8 @@ module.exports = (sequelize, DataTypes) => {
       Divisi.hasMany(models.Jabatan, {
         foreignKey: 'id_divisi',
         as: 'jabatan',
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       });
     }
   }

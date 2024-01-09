@@ -12,13 +12,7 @@ module.exports = {
       total_gaji: {
         type: Sequelize.INTEGER
       },
-      id_tunjangan: {
-        type: Sequelize.INTEGER
-      },
-      id_jabatan: {
-        type: Sequelize.INTEGER
-      },
-      id_potongan: {
+      total_potongan: {
         type: Sequelize.INTEGER
       },
       nip_pegawai: {
