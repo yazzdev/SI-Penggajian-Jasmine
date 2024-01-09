@@ -21,6 +21,9 @@ module.exports = {
       keahlian: {
         type: Sequelize.INTEGER
       },
+      nip_pegawai: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

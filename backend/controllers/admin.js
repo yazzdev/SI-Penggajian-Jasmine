@@ -64,7 +64,7 @@ module.exports = {
       });
     }
   },
-  updateAdmin: async (req, res) => {
+  update: async (req, res) => {
     try {
       const { id } = req.user;
       const { username, password } = req.body;

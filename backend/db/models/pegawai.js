@@ -18,6 +18,13 @@ module.exports = (sequelize, DataTypes) => {
         sourceKey: 'nip',
         as: 'penggajian',
       });
+
+      // Pegawai has one Tunjangan (1 to 1 relationship)
+      Pegawai.hasOne(models.Tunjangan, {
+        foreignKey: 'nip_pegawai',
+        sourceKey: 'nip',
+        as: 'tunjangan',
+      });
     }
   }
   Pegawai.init({

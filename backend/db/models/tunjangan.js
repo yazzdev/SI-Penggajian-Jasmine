@@ -11,13 +11,21 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'id_tunjangan',
         as: 'penggajian',
       });
+
+      // Tunjangan belongs to Pegawai (N to 1 relationship)
+      Tunjangan.belongsTo(models.Pegawai, {
+        foreignKey: 'nip_pegawai',
+        targetKey: 'nip',
+        as: 'pegawai',
+      });
     }
   }
   Tunjangan.init({
     transport: DataTypes.INTEGER,
     makan: DataTypes.INTEGER,
     komunikasi: DataTypes.INTEGER,
-    keahlian: DataTypes.INTEGER
+    keahlian: DataTypes.INTEGER,
+    nip_pegawai: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Tunjangan',

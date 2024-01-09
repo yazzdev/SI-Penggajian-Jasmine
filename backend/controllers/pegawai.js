@@ -2,7 +2,7 @@ const { Pegawai, Jabatan, Divisi } = require('../db/models');
 const { parse, isValid, parseISO } = require('date-fns');
 
 module.exports = {
-  addEmployee: async (req, res) => {
+  store: async (req, res) => {
     try {
       const { nip, nama_pegawai, tgl_masuk, bank, no_rekening, id_jabatan } = req.body;
 
@@ -57,7 +57,7 @@ module.exports = {
       });
     }
   },
-  showAll: async (req, res) => {
+  show: async (req, res) => {
     try {
       const pegawai = await Pegawai.findAll({
         attributes: {
@@ -89,9 +89,10 @@ module.exports = {
       });
     }
   },
-  updateEmployee: async (req, res) => {
+  update: async (req, res) => {
     try {
-      const { nip, nama_pegawai, tgl_masuk, bank, no_rekening, id_jabatan } = req.body;
+      const { nip } = req.params;
+      const { nama_pegawai, tgl_masuk, bank, no_rekening, id_jabatan } = req.body;
 
       const pegawai = await Pegawai.findOne({ where: { nip } });
 
@@ -114,7 +115,6 @@ module.exports = {
       }
 
       // Update data pegawai
-      pegawai.nip = nip || pegawai.nip;
       pegawai.nama_pegawai = nama_pegawai || pegawai.nama_pegawai;
       pegawai.tgl_masuk = parsedTglMasuk || pegawai.tgl_masuk;
       pegawai.bank = bank || pegawai.bank;
@@ -144,14 +144,11 @@ module.exports = {
       });
     }
   },
-  deleteEmployee: async (req, res) => {
+  destroy: async (req, res) => {
     try {
-      const { nip } = req.body;
-
-      // Cari pegawai berdasarkan NIP
+      const { nip } = req.params;
       const pegawai = await Pegawai.findOne({ where: { nip } });
 
-      // Jika pegawai tidak ditemukan
       if (!pegawai) {
         return res.status(404).json({
           status: false,
@@ -160,7 +157,6 @@ module.exports = {
         });
       }
 
-      // Hapus pegawai
       await pegawai.destroy();
 
       return res.status(200).json({

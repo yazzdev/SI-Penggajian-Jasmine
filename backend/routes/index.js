@@ -1,9 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const pegawai = require('../controllers/pegawai');
-const admin = require('../controllers/admin');
-
-const middlewares = require('../utils/middlewares');
+const admin = require('./admin');
+const pegawai = require('./pegawai');
+const tunjangan = require('./tunjangan');
 
 router.get('/', (req, res, next) => {
   res.render('index', {
@@ -11,15 +10,8 @@ router.get('/', (req, res, next) => {
   });
 });
 
-//admin
-router.post('/admin/login', admin.login);
-router.get('/admin/whoami', middlewares.auth, admin.whoami);
-router.put('/admin/update', middlewares.auth, admin.updateAdmin);
-
-//employee
-router.post('/employee/add', middlewares.auth, pegawai.addEmployee);
-router.get('/employee/show-all', middlewares.auth, pegawai.showAll);
-router.put('/employee/update', middlewares.auth, pegawai.updateEmployee);
-router.delete('/employee/delete', middlewares.auth, pegawai.deleteEmployee);
+router.use('/admin', admin);
+router.use('/pegawai', pegawai);
+router.use('/tunjangan', tunjangan);
 
 module.exports = router;
