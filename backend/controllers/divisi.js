@@ -1,4 +1,4 @@
-const { Divisi } = require('../db/models');
+const { Divisi, Jabatan } = require('../db/models');
 
 module.exports = {
   show: async (req, res) => {
@@ -67,24 +67,33 @@ module.exports = {
   destroy: async (req, res) => {
     try {
       const { id } = req.params;
+      const divisi = await Divisi.findOne({ where: { id } });
 
-      const deleted = await Divisi.destroy({ where: { id: id } });
-
-      if (!deleted) {
+      if (!divisi) {
         return res.status(404).json({
           status: false,
-          message: `Divisi not found!`,
+          message: 'Divisi tidak ditemukan!',
           data: null
         });
       }
 
+      // Hapus data Jabatan terkait
+      await Jabatan.destroy({ where: { id_divisi: divisi.id } });
+
+      await divisi.destroy();
+
       return res.status(200).json({
         status: true,
-        message: 'Divisi deleted successfully',
+        message: 'Hapus divisi berhasil!',
         data: null
       });
     } catch (error) {
-      throw error;
+      console.error(error);
+      return res.status(500).json({
+        status: false,
+        message: 'Internal Server Error',
+        data: null,
+      });
     }
   }
 }

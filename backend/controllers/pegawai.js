@@ -177,6 +177,12 @@ module.exports = {
         });
       }
 
+      // Hapus data Tunjangan terkait
+      await Tunjangan.destroy({ where: { nip_pegawai: pegawai.nip } });
+
+      // Hapus data Potongan terkait
+      await Potongan.destroy({ where: { nip_pegawai: pegawai.nip } });
+
       await pegawai.destroy();
 
       return res.status(200).json({
