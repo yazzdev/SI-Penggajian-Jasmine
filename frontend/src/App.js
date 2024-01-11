@@ -1,25 +1,18 @@
-// App.js
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from './components/Login';
-import UpdateAdmin from './components/UpdateAdmin';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import Login from "./pages/Login";
+import UpdateAdmin from "./pages/UpdateAdmin";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
-
   return (
-    <Router>
+    <BrowserRouter>
       <Routes>
-        <Route
-          path="/login"
-          element={<Login setLoggedIn={setLoggedIn} />}
-        />
-        <Route
-          path="/admin/update"
-          element={loggedIn ? <UpdateAdmin /> : <Login setLoggedIn={setLoggedIn} />}
-        />
+        <Route path="/" element={<Login />} />
+        <Route path="/update" element={<UpdateAdmin />} />
       </Routes>
-    </Router>
+      <ToastContainer theme="colored" position="bottom-center" />
+    </BrowserRouter>
   );
 }
 

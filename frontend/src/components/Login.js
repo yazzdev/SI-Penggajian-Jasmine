@@ -4,16 +4,12 @@ import axios from 'axios';
 import { Modal, Button, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
-const Login = ({ setLoggedIn }) => {
+const Login = ({ setToken }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [showErrorModal, setShowErrorModal] = useState(false);
   const navigate = useNavigate();
-
-  const redirectToUpdate = () => {
-    navigate('/admin/update');
-  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -25,17 +21,26 @@ const Login = ({ setLoggedIn }) => {
       });
 
       if (response.data.status) {
-        setLoggedIn(true);
+        setToken(response.data.data.token); // Set the token here
         redirectToUpdate();
       } else {
+        // Log the response for debugging
+        console.log('Login failed. Response:', response);
+
         setError(response.data.message || 'Login failed.');
         setShowErrorModal(true);
       }
     } catch (error) {
-      console.error('Error during login:', error.message);
+      // Log the error for debugging
+      console.error('Error during login:', error);
+
       setError('An error occurred during login.');
       setShowErrorModal(true);
     }
+  };
+
+  const redirectToUpdate = () => {
+    navigate('/update');
   };
 
   const handleCloseErrorModal = () => setShowErrorModal(false);
@@ -84,3 +89,4 @@ const Login = ({ setLoggedIn }) => {
 };
 
 export default Login;
+

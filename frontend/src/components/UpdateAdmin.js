@@ -7,7 +7,6 @@ const UpdateAdmin = ({ token }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [updateMessage, setUpdateMessage] = useState('');
-  
 
   const handleUpdate = async (e) => {
     e.preventDefault();
@@ -21,7 +20,7 @@ const UpdateAdmin = ({ token }) => {
         },
         {
           headers: {
-            Authorization: `${token}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );
