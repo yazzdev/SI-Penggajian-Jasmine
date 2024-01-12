@@ -54,7 +54,7 @@ const User = () => {
     axios
       .put(urledit, data, config)
       .then((response) => {
-        toast.success("berhasil update data");
+        toast.success("Berhasil Mengganti Kredensial");
       })
       .catch((error) => {
         toast.error(error?.message);
