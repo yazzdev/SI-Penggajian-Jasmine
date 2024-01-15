@@ -1,9 +1,9 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
-import DataPegawai from "../components/DataPegawai";
+import AddDataPegawai from "../components/pegawai/AddPegawai";
 
-const Pegawai = () => {
+const AddPegawai = () => {
   const menuItems = [
     { id: 1, label: "Penggajian", link: "/dashboard" },
     { id: 2, label: "Pegawai", link: "/pegawai" },
@@ -79,7 +79,7 @@ const Pegawai = () => {
           </Col>
 
           <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-            <DataPegawai />
+            <AddDataPegawai />
           </main>
         </Row>
       </Container>
@@ -87,4 +87,4 @@ const Pegawai = () => {
   );
 };
 
-export default Pegawai;
+export default AddPegawai;

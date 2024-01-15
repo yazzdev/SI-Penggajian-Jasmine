@@ -10,7 +10,7 @@ module.exports = {
       if (exist) {
         return res.status(400).json({
           status: false,
-          message: 'NIP is already used!',
+          message: 'NIP Sudah digunakan!',
           data: null
         });
       }
@@ -20,7 +20,7 @@ module.exports = {
       if (!isValid(parsedTglMasuk)) {
         return res.status(400).json({
           status: false,
-          message: 'Invalid date format for Tanggal Masuk!',
+          message: 'Invalid date format untuk Tanggal Masuk!',
           data: null
         });
       }
@@ -152,7 +152,7 @@ module.exports = {
       if (!isValid(parsedTglMasuk)) {
         return res.status(400).json({
           status: false,
-          message: 'Invalid date format for Tanggal Masuk!',
+          message: 'Invalid date format untuk Tanggal Masuk!',
           data: null
         });
       }
@@ -184,7 +184,7 @@ module.exports = {
 
       return res.status(200).json({
         status: true,
-        message: 'Update pegawai success!',
+        message: 'Pegawai Berhasil di Ubah!!',
         data: null
       });
     } catch (error) {

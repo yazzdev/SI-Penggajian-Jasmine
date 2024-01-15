@@ -67,7 +67,7 @@ module.exports = {
 
       return res.status(200).json({
         status: true,
-        message: 'Tunjangan update successfully',
+        message: 'Tunjangan Berhasil di Ubah!!',
         data: null
       });
     } catch (error) {

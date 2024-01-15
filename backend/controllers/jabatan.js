@@ -32,7 +32,7 @@ module.exports = {
       if (!nama_jabatan || !biaya_jabatan || !id_divisi) {
         return res.status(400).json({
           status: false,
-          message: 'Nama jabatan, Biaya Jabatan, dan Divisi is required!',
+          message: 'Nama jabatan, Biaya Jabatan, dan Divisi wajib di isi!',
           data: null
         });
       }
@@ -41,7 +41,7 @@ module.exports = {
       if (!exist){
         return res.status(404).json({
           status: false,
-          message: 'id_divisi does not exisst!!',
+          message: 'id_divisi Sudah Pernah Digunakan!!',
           data:null
         });
       }
@@ -54,7 +54,7 @@ module.exports = {
 
       return res.status(201).json({
         status: true,
-        message: 'Jabatan added successfully',
+        message: 'Jabatan Berhasil Ditambahkan!!',
         data: jabatan
       });
     } catch (error) {
@@ -70,14 +70,14 @@ module.exports = {
       if (updated[0] == 0) {
         return res.status(404).json({
           status: false,
-          message: `Jabatan not found!`,
+          message: `Jabatan Tidak Ditemukan!!`,
           data: null
         });
       }
 
       return res.status(200).json({
         status: true,
-        message: 'Jabatan update successfully',
+        message: 'Jabatan Berhasil Di Ubah!!',
         data: null
       });
     } catch (error) {

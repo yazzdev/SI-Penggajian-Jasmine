@@ -3,7 +3,8 @@ import { ToastContainer } from "react-toastify";
 import Login from "./pages/Login";
 import UpdateAdmin from "./pages/UpdateAdmin";
 import Dashboard from "./pages/Dashboard";
-import Pegawai from "./pages/Pegawai";
+import ShowPegawai from "./pages/ShowPegawai";
+import AddPegawai from './pages/AddPegawai';
 
 import Tunjangan from "./pages/Tunjangan";
 import Potongan from "./pages/Potongan";
@@ -16,7 +17,8 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/update" element={<UpdateAdmin />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/pegawai" element={<Pegawai />} />
+        <Route path="/pegawai" element={<ShowPegawai />} />
+        <Route path="/pegawai/add" element={<AddPegawai />} />
         <Route path="/tunjangan" element={<Tunjangan />} />
         <Route path="/potongan" element={<Potongan />} />
       </Routes>

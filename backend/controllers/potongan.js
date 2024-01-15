@@ -36,7 +36,7 @@ module.exports = {
       if (!potongan){
         return res.status(404).json({
           status: false,
-          message: `Potongan not found!`,
+          message: `Potongan tidak ditemukan!`,
           data: null
         });
       }
@@ -66,7 +66,7 @@ module.exports = {
 
       return res.status(200).json({
         status: true,
-        message: 'Potongan update successfully',
+        message: 'Potongan Berhasil di Ubah!',
         data: null
       });
     } catch (error) {

@@ -25,7 +25,7 @@ module.exports = {
       if (!nama_divisi) {
         return res.status(400).json({
           status: false,
-          message: 'Nama Divisi is required!',
+          message: 'Nama Divisi wajib di isi!!',
           data: null
         });
       }
@@ -34,7 +34,7 @@ module.exports = {
 
       return res.status(201).json({
         status: true,
-        message: 'Divisi added successfully',
+        message: 'Divisi berhasil ditambahkan!!',
         data: divisi
       });
     } catch (error) {
@@ -50,14 +50,14 @@ module.exports = {
       if (updated[0] == 0) {
         return res.status(404).json({
           status: false,
-          message: `Divisi not found!`,
+          message: `Divisi tidak ditemukan!`,
           data: null
         });
       }
 
       return res.status(200).json({
         status: true,
-        message: 'Divisi update successfully',
+        message: 'Divisi berhasil di ubah!!',
         data: null
       });
     } catch (error) {
