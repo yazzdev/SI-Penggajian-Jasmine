@@ -132,6 +132,49 @@ module.exports = {
       });
     }
   },
+  showOne: async (req, res) => {
+    try {
+      const { nip } = req.params;
+
+      const pegawai = await Pegawai.findOne({
+        where: { nip },
+        attributes: {
+          exclude: ['createdAt', 'updatedAt']
+        },
+        include: [{
+          model: Jabatan,
+          as: 'jabatan',
+          attributes: { exclude: ['createdAt', 'updatedAt'] },
+          include: [{
+            model: Divisi,
+            as: 'divisi',
+            attributes: { exclude: ['createdAt', 'updatedAt'] }
+          }]
+        }]
+      });
+
+      if (!pegawai) {
+        return res.status(404).json({
+          status: false,
+          message: 'Pegawai tidak ditemukan!',
+          data: null
+        });
+      }
+
+      return res.status(200).json({
+        status: true,
+        message: 'Success',
+        data: pegawai
+      });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({
+        status: false,
+        message: 'Internal Server Error',
+        data: null,
+      });
+    }
+  },
   update: async (req, res) => {
     try {
       const { nip } = req.params;

@@ -24,6 +24,10 @@ const DataTunjangan = () => {
     }
   };
 
+  function capitalizeEachWord(str) {
+    return str.replace(/\b\w/g, (match) => match.toUpperCase());
+  } 
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -52,7 +56,7 @@ const DataTunjangan = () => {
               <tr key={item.id}>
                 <td>{index + 1}</td>
                 <td>{item?.nip_pegawai}</td>
-                <td>{item?.pegawai?.nama_pegawai}</td>
+                <td>{capitalizeEachWord(item?.pegawai?.nama_pegawai)}</td>
                 <td>{item?.transport}</td>
                 <td>{item?.makan}</td>
                 <td>{item?.komunikasi}</td>

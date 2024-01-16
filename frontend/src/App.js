@@ -5,6 +5,7 @@ import UpdateAdmin from "./pages/UpdateAdmin";
 import Dashboard from "./pages/Dashboard";
 import ShowPegawai from "./pages/ShowPegawai";
 import AddPegawai from './pages/AddPegawai';
+import UpdatePegawai from './pages/UpdatePegawai';
 
 import Tunjangan from "./pages/Tunjangan";
 import Potongan from "./pages/Potongan";
@@ -19,6 +20,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/pegawai" element={<ShowPegawai />} />
         <Route path="/pegawai/add" element={<AddPegawai />} />
+        <Route path="/pegawai/update/:nip" element={<UpdatePegawai />} />
         <Route path="/tunjangan" element={<Tunjangan />} />
         <Route path="/potongan" element={<Potongan />} />
       </Routes>

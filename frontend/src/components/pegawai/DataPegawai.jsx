@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import UpdatePegawai from "./UpdatePegawai";
 import { Container, Button, Modal } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
 
 const DataPegawai = () => {
-  const [penggajianData, setPenggajianData] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedNIP, setSelectedNIP] = useState(null);
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const [penggajianData, setPenggajianData] = useState([]);
 
   const token = localStorage.getItem("Authorization");
   const url = `${process.env.REACT_APP_API_KEY}/pegawai/show`;
@@ -36,6 +38,10 @@ const DataPegawai = () => {
 
   const navigate = useNavigate();
 
+  const handleEdit = (nip) => {
+    navigate(`/pegawai/update/${nip}`);
+  };
+
   const handleDelete = (nip) => {
     setShowModal(true);
     setSelectedNIP(nip);
@@ -55,6 +61,10 @@ const DataPegawai = () => {
     setShowModal(false);
     setSelectedNIP(null);
   };
+
+  function capitalizeEachWord(str) {
+    return str.replace(/\b\w/g, (match) => match.toUpperCase());
+  } 
 
   useEffect(() => {
     fetchData();
@@ -94,15 +104,20 @@ const DataPegawai = () => {
             {penggajianData.map((item, index) => (
               <tr key={item.id}>
                 <td>{index + 1}</td>
-                <td>{item?.jabatan?.nama_jabatan}</td>
-                <td>{item?.jabatan?.divisi?.nama_divisi}</td>
+                <td>{capitalizeEachWord(item?.jabatan?.divisi?.nama_divisi)}</td>
+                <td>{capitalizeEachWord(item?.jabatan?.nama_jabatan)}</td>
                 <td>{item?.nip}</td>
-                <td>{item?.nama_pegawai}</td>
+                <td>{capitalizeEachWord(item?.nama_pegawai)}</td>
                 <td>{formatDate(item?.tgl_masuk)}</td>
                 <td>{item?.gaji_pokok}</td>
-                <td>{item?.bank}</td>
+                <td>{item?.bank.toUpperCase()}</td>
                 <td>{item?.no_rekening}</td>
                 <td>
+                  <FontAwesomeIcon
+                    icon={faEdit}
+                    style={{ cursor: "pointer", color: "blue", marginRight: "8px" }}
+                    onClick={() => handleEdit(item.nip)}
+                  />
                   <FontAwesomeIcon
                     icon={faTrash}
                     style={{ cursor: "pointer", color: "red" }}
@@ -131,6 +146,16 @@ const DataPegawai = () => {
             Delete
           </Button>
         </Modal.Footer>
+      </Modal>
+
+      {/* Modal for UpdatePegawai */}
+      <Modal show={showUpdateModal} onHide={() => setShowUpdateModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Data Pegawai {selectedNIP}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <UpdatePegawai nip={selectedNIP} />
+        </Modal.Body>
       </Modal>
     </Container>
   );

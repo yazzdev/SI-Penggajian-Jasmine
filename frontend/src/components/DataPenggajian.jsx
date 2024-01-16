@@ -24,6 +24,10 @@ const DataPenggajian = () => {
     }
   };
 
+  function capitalizeEachWord(str) {
+    return str.replace(/\b\w/g, (match) => match.toUpperCase());
+  } 
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -75,11 +79,11 @@ const DataPenggajian = () => {
               <tr key={item.id}>
                 {/* Populate with appropriate data from the API response */}
                 <td>{index + 1}</td>
-                <td style={{ whiteSpace: "nowrap" }}>{item?.pegawai?.jabatan?.divisi?.nama_divisi}</td>
-                <td style={{ whiteSpace: "nowrap" }}>{item?.pegawai?.jabatan?.nama_jabatan}</td>
+                <td style={{ whiteSpace: "nowrap" }}>{capitalizeEachWord(item?.pegawai?.jabatan?.divisi?.nama_divisi)}</td>
+                <td style={{ whiteSpace: "nowrap" }}>{capitalizeEachWord(item?.pegawai?.jabatan?.nama_jabatan)}</td>
                 <td style={{ whiteSpace: "nowrap" }}>{item?.pegawai?.jabatan?.biaya_jabatan}</td>
                 <td style={{ whiteSpace: "nowrap" }}>{item?.nip_pegawai}</td>
-                <td style={{ whiteSpace: "nowrap" }}>{item?.pegawai?.nama_pegawai}</td>
+                <td style={{ whiteSpace: "nowrap" }}>{capitalizeEachWord(item?.pegawai?.nama_pegawai)}</td>
                 <td style={{ whiteSpace: "nowrap" }}>{item?.pegawai?.gaji_pokok}</td>
                 <td style={{ whiteSpace: "nowrap" }}>{item?.tunjangan?.transport ?? 0}</td>
                 <td style={{ whiteSpace: "nowrap" }}>{item?.tunjangan?.makan ?? 0}</td>
@@ -94,7 +98,7 @@ const DataPenggajian = () => {
                 <td style={{ whiteSpace: "nowrap" }}>{item?.total_gaji}</td>
                 <td style={{ whiteSpace: "nowrap" }}>{item?.total_potongan}</td>
                 <td style={{ whiteSpace: "nowrap" }}>{item?.take_home_pay}</td>
-                <td style={{ whiteSpace: "nowrap" }}>{item?.pegawai?.bank}</td>
+                <td style={{ whiteSpace: "nowrap" }}>{item?.pegawai?.bank.toUpperCase()}</td>
                 <td style={{ whiteSpace: "nowrap" }}>{item?.pegawai?.no_rekening}</td>
               </tr>
             ))}
