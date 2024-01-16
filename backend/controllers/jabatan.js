@@ -1,4 +1,4 @@
-const { Jabatan, Divisi } = require('../db/models');
+const { Jabatan } = require('../db/models');
 
 module.exports = {
   show: async (req, res) => {
@@ -6,14 +6,7 @@ module.exports = {
       const potongan = await Jabatan.findAll({
         attributes: {
           exclude: ['createdAt', 'updatedAt']
-        },
-        include: [
-          {
-            model: Divisi,
-            as: 'divisi',
-            attributes: ['nama_divisi']
-          }
-        ]
+        }
       });
 
       return res.status(200).json({
@@ -33,14 +26,7 @@ module.exports = {
         where: { id: id },
         attributes: {
           exclude: ['createdAt', 'updatedAt']
-        },
-        include: [
-          {
-            model: Divisi,
-            as: 'divisi',
-            attributes: ['nama_divisi']
-          }
-        ]
+        }
       });
 
       if (!jabatan) {
@@ -67,29 +53,20 @@ module.exports = {
   },
   store: async (req, res) => {
     try {
-      const { nama_jabatan, biaya_jabatan, id_divisi } = req.body;
+      const { nama_divisi, nama_jabatan, biaya_jabatan } = req.body;
 
-      if (!nama_jabatan || !biaya_jabatan || !id_divisi) {
+      if (!nama_divisi || !nama_jabatan || !biaya_jabatan) {
         return res.status(400).json({
           status: false,
-          message: 'Nama jabatan, Biaya Jabatan, dan Divisi wajib di isi!',
+          message: 'Nama Divisi, Nama jabatan, Dan Biaya Jabatan wajib di isi!',
           data: null
         });
       }
 
-      const exist = await Divisi.findOne({ where: { id: id_divisi } });
-      if (!exist){
-        return res.status(404).json({
-          status: false,
-          message: 'id_divisi Sudah Pernah Digunakan!!',
-          data:null
-        });
-      }
-
       const jabatan = await Jabatan.create({
+        nama_divisi: nama_divisi,
         nama_jabatan: nama_jabatan,
         biaya_jabatan: biaya_jabatan,
-        id_divisi: id_divisi
       });
 
       return res.status(201).json({
@@ -122,6 +99,35 @@ module.exports = {
       });
     } catch (error) {
       throw error;
+    }
+  },
+  destroy: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const jabatan = await Jabatan.findOne({ where: { id } });
+
+      if (!jabatan) {
+        return res.status(404).json({
+          status: false,
+          message: 'Jabatan tidak ditemukan!',
+          data: null
+        });
+      }
+
+      await jabatan.destroy();
+
+      return res.status(200).json({
+        status: true,
+        message: 'Hapus Jabatan berhasil!',
+        data: null
+      });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({
+        status: false,
+        message: 'Internal Server Error',
+        data: null,
+      });
     }
   }
 }

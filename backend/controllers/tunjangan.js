@@ -25,7 +25,46 @@ module.exports = {
       throw error;
     }
   },
+  showOne: async (req, res) => {
+    try {
+      const { id } = req.params;
 
+      const tunjangan = await Tunjangan.findOne({
+        where: { id: id },
+        attributes: {
+          exclude: ['createdAt', 'updatedAt']
+        },
+        include: [
+          {
+            model: Pegawai,
+            as: 'pegawai',
+            attributes: ['nama_pegawai']
+          }
+        ]
+      });
+
+      if (!tunjangan) {
+        return res.status(404).json({
+          status: false,
+          message: 'Tunjangan tidak ditemukan!',
+          data: null
+        });
+      }
+
+      return res.status(200).json({
+        status: true,
+        message: 'Success',
+        data: tunjangan
+      });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({
+        status: false,
+        message: 'Internal Server Error',
+        data: null,
+      });
+    }
+  },
   update: async (req, res) => {
     try {
       const { id } = req.params;
@@ -57,10 +96,10 @@ module.exports = {
         const jabatan = await Jabatan.findByPk(pegawai.id_jabatan);
 
         const total_penggajianBaru =
-          tunjangan.transport + tunjangan.makan + tunjangan.komunikasi + tunjangan.keahlian;
+          parseInt(tunjangan.transport) + parseInt(tunjangan.makan) + parseInt(tunjangan.komunikasi) + parseInt(tunjangan.keahlian);
 
-        penggajian.total_gaji = jabatan.biaya_jabatan + total_penggajianBaru;
-        penggajian.take_home_pay = penggajian.total_gaji - penggajian.total_potongan;
+        penggajian.total_gaji = parseInt(jabatan.biaya_jabatan) + total_penggajianBaru;
+        penggajian.take_home_pay = penggajian.total_gaji - parseInt(penggajian.total_potongan);
 
         await penggajian.save();
       }

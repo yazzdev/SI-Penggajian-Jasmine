@@ -24,6 +24,46 @@ module.exports = {
     } catch (error) {
       throw error;
     }
+  }, 
+  showOne: async (req, res) => {
+    try {
+      const { id } = req.params;
+
+      const potongan = await Potongan.findOne({
+        where: { id: id },
+        attributes: {
+          exclude: ['createdAt', 'updatedAt']
+        },
+        include: [
+          {
+            model: Pegawai,
+            as: 'pegawai',
+            attributes: ['nama_pegawai']
+          }
+        ]
+      });
+
+      if (!potongan) {
+        return res.status(404).json({
+          status: false,
+          message: 'Potongan tidak ditemukan!',
+          data: null
+        });
+      }
+
+      return res.status(200).json({
+        status: true,
+        message: 'Success',
+        data: potongan
+      });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({
+        status: false,
+        message: 'Internal Server Error',
+        data: null,
+      });
+    }
   },
 
   update: async (req, res) => {
@@ -56,10 +96,10 @@ module.exports = {
 
       if (penggajian) {
         const total_potonganBaru =
-          potongan.makan + potongan.zakat + potongan.absensi + potongan.transport + potongan.pinjaman_pegawai + potongan.lain_lain;
+          parseInt(potongan.makan) + parseInt(potongan.zakat) + parseInt(potongan.absensi) + parseInt(potongan.transport) + parseInt(potongan.pinjaman_pegawai) + parseInt(potongan.lain_lain);
 
         penggajian.total_potongan = total_potonganBaru;
-        penggajian.take_home_pay = penggajian.total_gaji - total_potonganBaru;
+        penggajian.take_home_pay = parseInt(penggajian.total_gaji) - total_potonganBaru;
 
         await penggajian.save();
       }

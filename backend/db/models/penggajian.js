@@ -17,10 +17,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Penggajian.init({
-    total_gaji: DataTypes.INTEGER,
-    total_potongan: DataTypes.INTEGER,
+    total_gaji: DataTypes.BIGINT,
+    total_potongan: DataTypes.BIGINT,
     nip_pegawai: DataTypes.STRING,
-    take_home_pay: DataTypes.INTEGER
+    take_home_pay: DataTypes.BIGINT
   }, {
     sequelize,
     modelName: 'Penggajian',

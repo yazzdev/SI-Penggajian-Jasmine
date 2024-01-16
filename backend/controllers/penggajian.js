@@ -1,4 +1,4 @@
-const { Penggajian, Pegawai, Jabatan, Potongan, Tunjangan, Divisi } = require('../db/models');
+const { Penggajian, Pegawai, Jabatan, Potongan, Tunjangan } = require('../db/models');
 
 module.exports = {
   show: async (req, res) => {
@@ -19,17 +19,8 @@ module.exports = {
                 model: Jabatan,
                 as: 'jabatan',
                 attributes: {
-                  exclude: ['id','id_divisi','createdAt', 'updatedAt']
+                  exclude: ['id','createdAt', 'updatedAt']
                 },
-                include: [
-                  {
-                    model: Divisi,
-                    as: 'divisi',
-                    attributes: {
-                      exclude: ['id','createdAt', 'updatedAt']
-                    }
-                  }
-                ]
               },
               {
                 model: Tunjangan,

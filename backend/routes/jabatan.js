@@ -7,5 +7,6 @@ router.post('/add', middlewares.auth, jabatan.store);
 router.get('/show', middlewares.auth, jabatan.show);
 router.get('/show/:id', middlewares.auth, jabatan.showOne);
 router.put('/update/:id', middlewares.auth, jabatan.update);
+router.put('/delete/:id', middlewares.auth, jabatan.destroy);
 
 module.exports = router;

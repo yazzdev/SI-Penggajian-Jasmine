@@ -10,22 +10,22 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       makan: {
-        type: Sequelize.INTEGER
+        type: Sequelize.BIGINT
       },
       zakat: {
-        type: Sequelize.INTEGER
+        type: Sequelize.BIGINT
       },
       absensi: {
-        type: Sequelize.INTEGER
+        type: Sequelize.BIGINT
       },
       transport: {
-        type: Sequelize.INTEGER
+        type: Sequelize.BIGINT
       },
       pinjaman_pegawai: {
-        type: Sequelize.INTEGER
+        type: Sequelize.BIGINT
       },
       lain_lain: {
-        type: Sequelize.INTEGER
+        type: Sequelize.BIGINT
       },
       nip_pegawai:{
         type: Sequelize.STRING

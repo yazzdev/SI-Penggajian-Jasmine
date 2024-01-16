@@ -9,14 +9,14 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      nama_divisi: {
+        type: Sequelize.STRING
+      },
       nama_jabatan: {
         type: Sequelize.STRING
       },
       biaya_jabatan: {
-        type: Sequelize.INTEGER
-      },
-      id_divisi: {
-        type: Sequelize.INTEGER
+        type: Sequelize.BIGINT
       },
       createdAt: {
         allowNull: false,

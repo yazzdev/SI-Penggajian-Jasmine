@@ -17,12 +17,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Potongan.init({
-    makan: DataTypes.INTEGER,
-    zakat: DataTypes.INTEGER,
-    absensi: DataTypes.INTEGER,
-    transport: DataTypes.INTEGER,
-    pinjaman_pegawai: DataTypes.INTEGER,
-    lain_lain: DataTypes.INTEGER,
+    makan: DataTypes.BIGINT,
+    zakat: DataTypes.BIGINT,
+    absensi: DataTypes.BIGINT,
+    transport: DataTypes.BIGINT,
+    pinjaman_pegawai: DataTypes.BIGINT,
+    lain_lain: DataTypes.BIGINT,
     nip_pegawai: DataTypes.STRING
   }, {
     sequelize,

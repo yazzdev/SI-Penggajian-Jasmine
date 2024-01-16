@@ -10,16 +10,16 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       transport: {
-        type: Sequelize.INTEGER
+        type: Sequelize.BIGINT
       },
       makan: {
-        type: Sequelize.INTEGER
+        type: Sequelize.BIGINT
       },
       komunikasi: {
-        type: Sequelize.INTEGER
+        type: Sequelize.BIGINT
       },
       keahlian: {
-        type: Sequelize.INTEGER
+        type: Sequelize.BIGINT
       },
       nip_pegawai: {
         type: Sequelize.STRING
