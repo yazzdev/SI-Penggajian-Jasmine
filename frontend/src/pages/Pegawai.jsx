@@ -3,7 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 import DataPegawai from "../components/pegawai/DataPegawai";
 
-const ShowPegawai = () => {
+const Pegawai = () => {
   const menuItems = [
     { id: 1, label: "Penggajian", link: "/dashboard" },
     { id: 2, label: "Pegawai", link: "/pegawai" },
@@ -14,7 +14,7 @@ const ShowPegawai = () => {
 
   const location = useLocation();
   const headerHeight = 60;
-  const remainingHeight = window.innerHeight - headerHeight - 1;
+  const remainingHeight = window.innerHeight - headerHeight;
 
   return (
     <>
@@ -87,4 +87,4 @@ const ShowPegawai = () => {
   );
 };
 
-export default ShowPegawai;
+export default Pegawai;

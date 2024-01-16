@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import UpdatePegawai from "./UpdatePegawai";
+import UpdateJabatan from "./UpdateJabatan";
 import { Container, Button, Modal } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,12 +8,12 @@ import { faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
 
 const DataPegawai = () => {
   const [showModal, setShowModal] = useState(false);
-  const [selectedNIP, setSelectedNIP] = useState(null);
+  const [selectedId, setSelectedId] = useState(null);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
-  const [penggajianData, setPenggajianData] = useState([]);
+  const [jabatanData, setJabatanData] = useState([]);
 
   const token = localStorage.getItem("Authorization");
-  const url = `${process.env.REACT_APP_API_KEY}/pegawai/show`;
+  const url = `${process.env.REACT_APP_API_KEY}/jabatan/show`;
   const config = {
     headers: {
       Authorization: token,
@@ -21,16 +21,11 @@ const DataPegawai = () => {
     cache: 'no-store',
   };
 
-  const formatDate = (dateString) => {
-    const options = { year: "numeric", month: "2-digit", day: "2-digit" };
-    return new Date(dateString).toLocaleDateString("en-GB", options);
-  };
-
   const fetchData = async () => {
     try {
       const response = await axios.get(url, config);
       console.log(response.data);
-      setPenggajianData(response.data.data);
+      setJabatanData(response.data.data);
     } catch (error) {
       console.log(error);
     }
@@ -38,18 +33,18 @@ const DataPegawai = () => {
 
   const navigate = useNavigate();
 
-  const handleEdit = (nip) => {
-    navigate(`/pegawai/update/${nip}`);
+  const handleEdit = (id) => {
+    navigate(`/jabatan/update/${id}`);
   };
 
-  const handleDelete = (nip) => {
+  const handleDelete = (id) => {
     setShowModal(true);
-    setSelectedNIP(nip);
+    setSelectedId(id);
   };
 
   const confirmDelete = async () => {
     try {
-      await axios.delete(`${process.env.REACT_APP_API_KEY}/pegawai/delete/${selectedNIP}`, config);
+      await axios.delete(`${process.env.REACT_APP_API_KEY}/jabatan/delete/${selectedId}`, config);
       fetchData();
       handleCloseModal();
     } catch (error) {
@@ -59,12 +54,12 @@ const DataPegawai = () => {
 
   const handleCloseModal = () => {
     setShowModal(false);
-    setSelectedNIP(null);
+    setSelectedId(null);
   };
 
   function capitalizeEachWord(str) {
     return str.replace(/\b\w/g, (match) => match.toUpperCase());
-  } 
+  }
 
   useEffect(() => {
     fetchData();
@@ -73,14 +68,14 @@ const DataPegawai = () => {
   return (
     <Container fluid>
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h5>Data Pegawai</h5>
+        <h5>Data Jabatan</h5>
         <Button
           variant="primary"
           onClick={() => {
-            navigate("/pegawai/add");
+            navigate("/jabatan/add");
           }}
         >
-          Tambah Data Pegawai
+          Tambah Data Jabatan
         </Button>
       </div>
 
@@ -91,37 +86,26 @@ const DataPegawai = () => {
               <th>No</th>
               <th>Divisi</th>
               <th>Jabatan</th>
-              <th>NIP</th>
-              <th>Nama</th>
-              <th>Tanggal Masuk</th>
-              <th>Gaji Pokok</th>
-              <th>Bank</th>
-              <th>No Rekening</th>
-              <th>Aksi</th>
+              <th>Gaji Jabatan</th>
             </tr>
           </thead>
           <tbody>
-            {penggajianData.map((item, index) => (
+            {jabatanData.map((item, index) => (
               <tr key={item.id}>
                 <td>{index + 1}</td>
-                <td>{capitalizeEachWord(item?.jabatan?.nama_divisi)}</td>
-                <td>{capitalizeEachWord(item?.jabatan?.nama_jabatan)}</td>
-                <td>{item?.nip}</td>
-                <td>{capitalizeEachWord(item?.nama_pegawai)}</td>
-                <td>{formatDate(item?.tgl_masuk)}</td>
-                <td>{item?.gaji_pokok}</td>
-                <td>{item?.bank.toUpperCase()}</td>
-                <td>{item?.no_rekening}</td>
+                <td>{capitalizeEachWord(item?.nama_divisi)}</td>
+                <td>{capitalizeEachWord(item?.nama_jabatan)}</td>
+                <td>{item?.biaya_jabatan}</td>
                 <td>
                   <FontAwesomeIcon
                     icon={faEdit}
                     style={{ cursor: "pointer", color: "blue", marginRight: "8px" }}
-                    onClick={() => handleEdit(item.nip)}
+                    onClick={() => handleEdit(item.id)}
                   />
                   <FontAwesomeIcon
                     icon={faTrash}
                     style={{ cursor: "pointer", color: "red" }}
-                    onClick={() => handleDelete(item.nip)}
+                    onClick={() => handleDelete(item.id)}
                   />
                 </td>
               </tr>
@@ -136,7 +120,7 @@ const DataPegawai = () => {
           <Modal.Title>Konfirmasi Penghapusan</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>Apakah Anda yakin ingin menghapus data dengan NIP : "{selectedNIP}"?</p>
+          <p>Apakah Anda yakin ingin menghapus data : "{selectedId}"?</p>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseModal}>
@@ -148,13 +132,13 @@ const DataPegawai = () => {
         </Modal.Footer>
       </Modal>
 
-      {/* Modal for UpdatePegawai */}
+      {/* Modal for UpdateJabatan */}
       <Modal show={showUpdateModal} onHide={() => setShowUpdateModal(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Edit Data Pegawai {selectedNIP}</Modal.Title>
+          <Modal.Title>Edit Data Jabatan {selectedId}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <UpdatePegawai nip={selectedNIP} />
+          <UpdateJabatan id={selectedId} />
         </Modal.Body>
       </Modal>
     </Container>

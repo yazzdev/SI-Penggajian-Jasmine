@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Container } from "react-bootstrap";
+import UpdatePotongan from "./UpdatePotongan";
+import { Container, Modal } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
 
 const DataPotongan = () => {
-  const [penggajianData, setPenggajianData] = useState([]);
+  const [selectedId, setSelectedId] = useState(null);
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const [potonganData, setPotonganData] = useState([]);
 
   const token = localStorage.getItem("Authorization");
   const url = `${process.env.REACT_APP_API_KEY}/potongan/show`;
@@ -18,10 +24,16 @@ const DataPotongan = () => {
     try {
       const response = await axios.get(url, config);
       console.log(response.data);
-      setPenggajianData(response.data.data);
+      setPotonganData(response.data.data);
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const navigate = useNavigate();
+
+  const handleEdit = (id) => {
+    navigate(`/potongan/update/${id}`);
   };
 
   function capitalizeEachWord(str) {
@@ -42,7 +54,7 @@ const DataPotongan = () => {
         <table className="table table-bordered table-hover">
           <thead>
             <tr>
-              <th>No</th>
+              <th>ID</th>
               <th>NIP</th>
               <th>Nama</th>
               <th>Makan</th>
@@ -51,10 +63,11 @@ const DataPotongan = () => {
               <th>Transport</th>
               <th>Pinjaman Pegawai</th>
               <th>Lain-Lain</th>
+              <th>Aksi</th>
             </tr>
           </thead>
           <tbody>
-            {penggajianData.map((item, index) => (
+            {potonganData.map((item, index) => (
               <tr key={item.id}>
                 <td>{index + 1}</td>
                 <td>{item?.nip_pegawai}</td>
@@ -65,11 +78,27 @@ const DataPotongan = () => {
                 <td>{item?.transport}</td>
                 <td>{item?.pinjaman_pegawai}</td>
                 <td>{item?.lain_lain}</td>
+                <td>
+                  <FontAwesomeIcon
+                    icon={faEdit}
+                    style={{ cursor: "pointer", color: "blue", marginRight: "8px" }}
+                    onClick={() => handleEdit(item.id)}
+                  />
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+      {/* Modal for UpdatePotongan */}
+      <Modal show={showUpdateModal} onHide={() => setShowUpdateModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Data Potongan</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <UpdatePotongan nip={selectedId} />
+        </Modal.Body>
+      </Modal>
     </Container>
   );
 };

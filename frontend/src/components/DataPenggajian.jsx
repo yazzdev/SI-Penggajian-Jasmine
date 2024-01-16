@@ -79,7 +79,7 @@ const DataPenggajian = () => {
               <tr key={item.id}>
                 {/* Populate with appropriate data from the API response */}
                 <td>{index + 1}</td>
-                <td style={{ whiteSpace: "nowrap" }}>{capitalizeEachWord(item?.pegawai?.jabatan?.divisi?.nama_divisi)}</td>
+                <td style={{ whiteSpace: "nowrap" }}>{capitalizeEachWord(item?.pegawai?.jabatan?.nama_divisi)}</td>
                 <td style={{ whiteSpace: "nowrap" }}>{capitalizeEachWord(item?.pegawai?.jabatan?.nama_jabatan)}</td>
                 <td style={{ whiteSpace: "nowrap" }}>{item?.pegawai?.jabatan?.biaya_jabatan}</td>
                 <td style={{ whiteSpace: "nowrap" }}>{item?.nip_pegawai}</td>

@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Container } from "react-bootstrap";
+import UpdateTunjangan from "./UpdateTunjangan";
+import { Container, Modal } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
 
 const DataTunjangan = () => {
-  const [penggajianData, setPenggajianData] = useState([]);
+  const [selectedId, setSelectedId] = useState(null);
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const [tunjanganData, setTunjanganData] = useState([]);
 
   const token = localStorage.getItem("Authorization");
   const url = `${process.env.REACT_APP_API_KEY}/tunjangan/show`;
@@ -18,10 +24,16 @@ const DataTunjangan = () => {
     try {
       const response = await axios.get(url, config);
       console.log(response.data);
-      setPenggajianData(response.data.data);
+      setTunjanganData(response.data.data);
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const navigate = useNavigate();
+
+  const handleEdit = (id) => {
+    navigate(`/tunjangan/update/${id}`);
   };
 
   function capitalizeEachWord(str) {
@@ -49,10 +61,11 @@ const DataTunjangan = () => {
               <th>Makan</th>
               <th>Komunikasi</th>
               <th>Keahlian</th>
+              <th>Aksi</th>
             </tr>
           </thead>
           <tbody>
-            {penggajianData.map((item, index) => (
+            {tunjanganData.map((item, index) => (
               <tr key={item.id}>
                 <td>{index + 1}</td>
                 <td>{item?.nip_pegawai}</td>
@@ -61,11 +74,27 @@ const DataTunjangan = () => {
                 <td>{item?.makan}</td>
                 <td>{item?.komunikasi}</td>
                 <td>{item?.keahlian}</td>
+                <td>
+                  <FontAwesomeIcon
+                    icon={faEdit}
+                    style={{ cursor: "pointer", color: "blue", marginRight: "8px" }}
+                    onClick={() => handleEdit(item.id)}
+                  />
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+      {/* Modal for UpdateTunjangan */}
+      <Modal show={showUpdateModal} onHide={() => setShowUpdateModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Data Potongan</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <UpdateTunjangan nip={selectedId} />
+        </Modal.Body>
+      </Modal>
     </Container>
   );
 };

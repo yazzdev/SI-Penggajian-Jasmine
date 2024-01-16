@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
-import DataTunjangan from "../components/DataTunjangan";
+import DataTunjangan from "../components/tunjangan/DataTunjangan";
 
 const Tunjangan = () => {
   const menuItems = [
@@ -14,7 +14,7 @@ const Tunjangan = () => {
 
   const location = useLocation();
   const headerHeight = 60;
-  const remainingHeight = window.innerHeight - headerHeight - 1;
+  const remainingHeight = window.innerHeight - headerHeight;
 
   return (
     <>

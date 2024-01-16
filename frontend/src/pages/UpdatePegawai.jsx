@@ -14,7 +14,7 @@ const UpdatePegawai = () => {
 
   const location = useLocation();
   const headerHeight = 60;
-  const remainingHeight = window.innerHeight - headerHeight - 1;
+  const remainingHeight = window.innerHeight - headerHeight;
 
   return (
     <>

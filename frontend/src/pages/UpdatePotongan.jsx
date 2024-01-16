@@ -1,9 +1,9 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
-import DataPotongan from "../components/potongan/DataPotongan";
+import UpdateDataPotongan from "../components/potongan/UpdatePotongan";
 
-const Potongan = () => {
+const UpdatePotongan = () => {
   const menuItems = [
     { id: 1, label: "Penggajian", link: "/dashboard" },
     { id: 2, label: "Pegawai", link: "/pegawai" },
@@ -79,7 +79,7 @@ const Potongan = () => {
           </Col>
 
           <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-            <DataPotongan />
+            <UpdateDataPotongan />
           </main>
         </Row>
       </Container>
@@ -87,4 +87,4 @@ const Potongan = () => {
   );
 };
 
-export default Potongan;
+export default UpdatePotongan;
