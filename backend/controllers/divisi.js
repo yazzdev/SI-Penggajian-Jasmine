@@ -18,6 +18,39 @@ module.exports = {
       throw error;
     }
   },
+  showOne: async (req, res) => {
+    try {
+      const { id } = req.params;
+
+      const divisi = await Divisi.findOne({
+        where: { id: id },
+        attributes: {
+          exclude: ['createdAt', 'updatedAt']
+        }
+      });
+
+      if (!divisi) {
+        return res.status(404).json({
+          status: false,
+          message: 'Divisi tidak ditemukan!',
+          data: null
+        });
+      }
+
+      return res.status(200).json({
+        status: true,
+        message: 'Success',
+        data: divisi
+      });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({
+        status: false,
+        message: 'Internal Server Error',
+        data: null,
+      });
+    }
+  },
   store: async (req, res) => {
     try {
       const { nama_divisi } = req.body;
