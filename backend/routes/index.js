@@ -8,7 +8,7 @@ const jabatan = require('./jabatan');
 const penggajian = require('./penggajian');
 
 router.get('/', (req, res, next) => {
-  res.render('index', {
+  res.status(200).json({
     message: 'Welcome at Home Page!!',
   });
 });
