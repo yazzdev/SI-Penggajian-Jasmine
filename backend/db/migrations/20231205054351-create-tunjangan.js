@@ -10,16 +10,24 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       transport: {
-        type: Sequelize.BIGINT
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
       },
       makan: {
-        type: Sequelize.BIGINT
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
       },
       komunikasi: {
-        type: Sequelize.BIGINT
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
       },
       keahlian: {
-        type: Sequelize.BIGINT
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
       },
       nip_pegawai: {
         type: Sequelize.STRING

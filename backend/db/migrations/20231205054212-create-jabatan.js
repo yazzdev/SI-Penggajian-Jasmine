@@ -16,7 +16,9 @@ module.exports = {
         type: Sequelize.STRING
       },
       biaya_jabatan: {
-        type: Sequelize.BIGINT
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
       },
       createdAt: {
         allowNull: false,

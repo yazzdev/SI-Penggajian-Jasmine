@@ -10,24 +10,36 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       makan: {
-        type: Sequelize.BIGINT
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
       },
       zakat: {
-        type: Sequelize.BIGINT
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
       },
       absensi: {
-        type: Sequelize.BIGINT
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
       },
       transport: {
-        type: Sequelize.BIGINT
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
       },
       pinjaman_pegawai: {
-        type: Sequelize.BIGINT
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
       },
       lain_lain: {
-        type: Sequelize.BIGINT
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
       },
-      nip_pegawai:{
+      nip_pegawai: {
         type: Sequelize.STRING
       },
       createdAt: {

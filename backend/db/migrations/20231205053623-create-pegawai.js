@@ -19,7 +19,9 @@ module.exports = {
         type: Sequelize.DATE
       },
       gaji_pokok: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
       },
       bank: {
         type: Sequelize.STRING

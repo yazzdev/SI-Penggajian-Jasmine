@@ -10,16 +10,22 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       total_gaji: {
-        type: Sequelize.BIGINT
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
       },
       total_potongan: {
-        type: Sequelize.BIGINT
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
       },
       nip_pegawai: {
         type: Sequelize.STRING
       },
       take_home_pay: {
-        type: Sequelize.BIGINT
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
       },
       createdAt: {
         allowNull: false,

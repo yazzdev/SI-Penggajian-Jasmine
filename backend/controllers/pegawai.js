@@ -64,12 +64,12 @@ module.exports = {
       const potongan = await Potongan.findOne({ where: { nip_pegawai: pegawai.nip } });
 
       const total_gaji =
-        parseInt(jabatan.biaya_jabatan) + parseInt(pegawai.gaji_pokok) + parseInt(tunjangan.transport) + parseInt(tunjangan.makan) +
-        parseInt(tunjangan.komunikasi) + parseInt(tunjangan.keahlian);
+        jabatan.biaya_jabatan + pegawai.gaji_pokok + tunjangan.transport + tunjangan.makan +
+        tunjangan.komunikasi + tunjangan.keahlian;
 
       const total_potongan =
-        parseInt(potongan.makan) + parseInt(potongan.zakat) + parseInt(potongan.absensi) +
-        parseInt(potongan.transport) + parseInt(potongan.pinjaman_pegawai) + parseInt(potongan.lain_lain);
+        potongan.makan + potongan.zakat + potongan.absensi +
+        potongan.transport + potongan.pinjaman_pegawai + potongan.lain_lain;
 
       const take_home_pay = total_gaji - total_potongan;
 
@@ -211,11 +211,11 @@ module.exports = {
         const jabatan = await Jabatan.findByPk(pegawai.id_jabatan);
 
         const total_gaji =
-          parseInt(jabatan.biaya_jabatan) + parseInt(pegawai.gaji_pokok) + parseInt(tunjangan.transport) + parseInt(tunjangan.makan) +
-          parseInt(tunjangan.komunikasi) + parseInt(tunjangan.keahlian);
+          jabatan.biaya_jabatan + pegawai.gaji_pokok + tunjangan.transport + tunjangan.makan +
+          tunjangan.komunikasi + tunjangan.keahlian;
 
         penggajian.total_gaji = total_gaji;
-        penggajian.take_home_pay = total_gaji - parseInt(penggajian.total_potongan);
+        penggajian.take_home_pay = total_gaji - penggajian.total_potongan;
 
         await penggajian.save();
       }
