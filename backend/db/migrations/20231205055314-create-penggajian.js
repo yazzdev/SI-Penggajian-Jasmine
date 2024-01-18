@@ -7,7 +7,7 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       total_gaji: {
         type: Sequelize.INTEGER,
@@ -20,12 +20,15 @@ module.exports = {
         defaultValue: 0,
       },
       nip_pegawai: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       take_home_pay: {
         type: Sequelize.INTEGER,
         allowNull: false,
         defaultValue: 0,
+      },
+      id_jabatan: {
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,

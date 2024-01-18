@@ -17,10 +17,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Tunjangan.init({
-    transport: DataTypes.BIGINT,
-    makan: DataTypes.BIGINT,
-    komunikasi: DataTypes.BIGINT,
-    keahlian: DataTypes.BIGINT,
+    transport: DataTypes.INTEGER,
+    makan: DataTypes.INTEGER,
+    komunikasi: DataTypes.INTEGER,
+    keahlian: DataTypes.INTEGER,
     nip_pegawai: DataTypes.STRING
   }, {
     sequelize,

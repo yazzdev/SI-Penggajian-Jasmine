@@ -75,7 +75,7 @@ module.exports = {
       if (!tunjangan) {
         return res.status(404).json({
           status: false,
-          message: `Tunjangan not found!`,
+          message: `Tunjangan tidak ditemukan!`,
           data: null
         });
       }

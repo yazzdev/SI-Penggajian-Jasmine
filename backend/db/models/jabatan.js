@@ -13,12 +13,21 @@ module.exports = (sequelize, DataTypes) => {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       });
+
+      // Jabatan has many Penggajian (1 to N relationship)
+      Jabatan.hasOne(models.Penggajian, {
+        foreignKey: 'id_jabatan',
+        sourceKey: 'id',
+        as: 'penggajian',
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
+      });
     }
   }
   Jabatan.init({
     nama_divisi: DataTypes.STRING,
     nama_jabatan: DataTypes.STRING,
-    biaya_jabatan: DataTypes.BIGINT
+    biaya_jabatan: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'Jabatan',

@@ -78,7 +78,8 @@ module.exports = {
         total_gaji,
         total_potongan,
         nip_pegawai: pegawai.nip,
-        take_home_pay
+        take_home_pay,
+        id_jabatan: pegawai.id_jabatan
       });
 
       return res.status(201).json({

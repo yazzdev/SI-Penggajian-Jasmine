@@ -14,13 +14,22 @@ module.exports = (sequelize, DataTypes) => {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       });
+
+      Penggajian.belongsTo(models.Jabatan, {
+        foreignKey: 'id_jabatan',
+        targetKey: 'id',
+        as: 'jabatan',
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
+      });
     }
   }
   Penggajian.init({
-    total_gaji: DataTypes.BIGINT,
-    total_potongan: DataTypes.BIGINT,
+    total_gaji: DataTypes.INTEGER,
+    total_potongan: DataTypes.INTEGER,
     nip_pegawai: DataTypes.STRING,
-    take_home_pay: DataTypes.BIGINT
+    take_home_pay: DataTypes.INTEGER,
+    id_jabatan: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'Penggajian',
