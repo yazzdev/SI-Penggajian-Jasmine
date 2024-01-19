@@ -95,11 +95,10 @@ module.exports = {
         const pegawai = await Pegawai.findOne({ where: { nip: tunjangan.nip_pegawai } });
         const jabatan = await Jabatan.findByPk(pegawai.id_jabatan);
 
-        const total_penggajianBaru =
-          tunjangan.transport + tunjangan.makan + tunjangan.komunikasi + tunjangan.keahlian;
+        const total_penggajianBaru = parseInt(tunjangan.transport) + parseInt(tunjangan.makan) + parseInt(tunjangan.komunikasi) + parseInt(tunjangan.keahlian);
 
-        penggajian.total_gaji = pegawai.gaji_pokok + jabatan.biaya_jabatan + total_penggajianBaru;
-        penggajian.take_home_pay = penggajian.total_gaji - penggajian.total_potongan;
+        penggajian.total_gaji = parseInt(pegawai.gaji_pokok) + parseInt(jabatan.biaya_jabatan) + total_penggajianBaru;
+        penggajian.take_home_pay = parseInt(penggajian.total_gaji) - parseInt(penggajian.total_potongan);
 
         await penggajian.save();
       }

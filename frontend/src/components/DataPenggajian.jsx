@@ -32,6 +32,10 @@ const DataPenggajian = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    console.log(penggajianData);
+  }, [penggajianData]);
+
   return (
     <Container fluid>
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -85,16 +89,16 @@ const DataPenggajian = () => {
                 <td style={{ whiteSpace: "nowrap" }}>{item?.nip_pegawai}</td>
                 <td style={{ whiteSpace: "nowrap" }}>{capitalizeEachWord(item?.pegawai?.nama_pegawai)}</td>
                 <td style={{ whiteSpace: "nowrap" }}>{item?.pegawai?.gaji_pokok}</td>
-                <td style={{ whiteSpace: "nowrap" }}>{item?.tunjangan?.transport ?? 0}</td>
-                <td style={{ whiteSpace: "nowrap" }}>{item?.tunjangan?.makan ?? 0}</td>
-                <td style={{ whiteSpace: "nowrap" }}>{item?.tunjangan?.komunikasi ?? 0}</td>
-                <td style={{ whiteSpace: "nowrap" }}>{item?.tunjangan?.keahlian ?? 0}</td>
-                <td style={{ whiteSpace: "nowrap" }}>{item?.potongan?.makan ?? 0}</td>
-                <td style={{ whiteSpace: "nowrap" }}>{item?.potongan?.zakat ?? 0}</td>
-                <td style={{ whiteSpace: "nowrap" }}>{item?.potongan?.absensi ?? 0}</td>
-                <td style={{ whiteSpace: "nowrap" }}>{item?.potongan?.transport ?? 0}</td>
-                <td style={{ whiteSpace: "nowrap" }}>{item?.potongan?.pinjaman_pegawai ?? 0}</td>
-                <td style={{ whiteSpace: "nowrap" }}>{item?.potongan?.lain_lain ?? 0}</td>
+                <td style={{ whiteSpace: "nowrap" }}>{item?.pegawai?.tunjangan?.transport ?? 0}</td>
+                <td style={{ whiteSpace: "nowrap" }}>{item?.pegawai?.tunjangan?.makan ?? 0}</td>
+                <td style={{ whiteSpace: "nowrap" }}>{item?.pegawai?.tunjangan?.komunikasi ?? 0}</td>
+                <td style={{ whiteSpace: "nowrap" }}>{item?.pegawai?.tunjangan?.keahlian ?? 0}</td>
+                <td style={{ whiteSpace: "nowrap" }}>{item?.pegawai?.potongan?.makan ?? 0}</td>
+                <td style={{ whiteSpace: "nowrap" }}>{item?.pegawai?.potongan?.zakat ?? 0}</td>
+                <td style={{ whiteSpace: "nowrap" }}>{item?.pegawai?.potongan?.absensi ?? 0}</td>
+                <td style={{ whiteSpace: "nowrap" }}>{item?.pegawai?.potongan?.transport ?? 0}</td>
+                <td style={{ whiteSpace: "nowrap" }}>{item?.pegawai?.potongan?.pinjaman_pegawai ?? 0}</td>
+                <td style={{ whiteSpace: "nowrap" }}>{item?.pegawai?.potongan?.lain_lain ?? 0}</td>
                 <td style={{ whiteSpace: "nowrap" }}>{item?.total_gaji}</td>
                 <td style={{ whiteSpace: "nowrap" }}>{item?.total_potongan}</td>
                 <td style={{ whiteSpace: "nowrap" }}>{item?.take_home_pay}</td>

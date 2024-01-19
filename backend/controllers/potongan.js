@@ -96,10 +96,10 @@ module.exports = {
 
       if (penggajian) {
         const total_potonganBaru =
-          potongan.makan + potongan.zakat + potongan.absensi + potongan.transport + potongan.pinjaman_pegawai + potongan.lain_lain;
+          parseInt(potongan.makan) + parseInt(potongan.zakat) + parseInt(potongan.absensi) + parseInt(potongan.transport) + parseInt(potongan.pinjaman_pegawai) + parseInt(potongan.lain_lain);
 
         penggajian.total_potongan = total_potonganBaru;
-        penggajian.take_home_pay = penggajian.total_gaji - total_potonganBaru;
+        penggajian.take_home_pay = parseInt(penggajian.total_gaji) - total_potonganBaru;
 
         await penggajian.save();
       }
