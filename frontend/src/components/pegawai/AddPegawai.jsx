@@ -1,8 +1,9 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Button, Form, Card, } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function AddPegawai() {
 
@@ -13,7 +14,33 @@ function AddPegawai() {
   const [bank, setBank] = useState("");
   const [no_rekening, setNoRekening] = useState("");
   const [id_jabatan, setIdJabatan] = useState("");
+  const [jabatanList, setJabatanList] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchJabatan = async () => {
+      try {
+        const token = localStorage.getItem("Authorization");
+
+        if (!token) {
+          console.error("Token not found.");
+          return;
+        }
+
+        const response = await axios.get(`${process.env.REACT_APP_API_KEY}/jabatan/show`, {
+          headers: {
+            Authorization: token,
+          },
+        });
+
+        setJabatanList(response.data.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchJabatan();
+  }, []);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -161,10 +188,17 @@ function AddPegawai() {
                 <Form.Group className="my-4" controlId="formBasicEmail">
                   <Form.Label>Jabatan</Form.Label>
                   <Form.Control
-                    type="jabatan"
+                    as="select"
                     value={id_jabatan}
                     onChange={(e) => setIdJabatan(e.target.value)}
-                  />
+                    className="custom-select"
+                  >
+                    <option value="">Pilih Jabatan</option>
+                    {jabatanList.map((jabatan) => (
+                      <option key={jabatan.id} value={jabatan.id}> {jabatan.nama_divisi} - {jabatan.nama_jabatan}
+                      </option>
+                    ))}
+                  </Form.Control>
                 </Form.Group>
 
                 <div className="d-grid gap-2">

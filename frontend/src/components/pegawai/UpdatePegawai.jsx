@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 const UpdatePegawai = () => {
   const { nip } = useParams();
+  const [jabatanList, setJabatanList] = useState([]);
   const [pegawai, setPegawai] = useState({
     nip: "",
     nama_pegawai: "",
@@ -40,6 +41,23 @@ const UpdatePegawai = () => {
     };
 
     fetchData();
+
+    const fetchJabatan = async () => {
+      try {
+        const token = localStorage.getItem("Authorization");
+        const response = await axios.get(`${process.env.REACT_APP_API_KEY}/jabatan/show`, {
+          headers: {
+            Authorization: token,
+          },
+        });
+
+        setJabatanList(response.data.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchJabatan();
   }, [nip]);
 
   const handleSubmit = async (e) => {
@@ -119,7 +137,19 @@ const UpdatePegawai = () => {
 
                 <Form.Group className="my-4" controlId="formBasicEmail">
                   <Form.Label>Jabatan</Form.Label>
-                  <Form.Control type="text" value={pegawai?.id_jabatan} onChange={(e) => setPegawai({ ...pegawai, id_jabatan: e.target.value })} />
+                  <Form.Control
+                    as="select"
+                    value={pegawai?.id_jabatan}
+                    onChange={(e) => setPegawai({ ...pegawai, id_jabatan: e.target.value })}
+                    className="custom-select"
+                  >
+                    <option value="">Pilih Jabatan</option>
+                    {jabatanList.map((jabatan) => (
+                      <option key={jabatan.id} value={jabatan.id}>
+                        {jabatan.nama_divisi} - {jabatan.nama_jabatan}
+                      </option>
+                    ))}
+                  </Form.Control>
                 </Form.Group>
 
                 <div className="d-grid gap-2">
