@@ -1,7 +1,7 @@
 import '../App.css'
 import React from "react";
 import Sidebar from '../components/Sidebar';
-import DataPenggajian from "../components/DataPenggajian";
+import DataPenggajian from "../components/penggajian/DataPenggajian";
 
 const Dashboard = () => {
   return (
