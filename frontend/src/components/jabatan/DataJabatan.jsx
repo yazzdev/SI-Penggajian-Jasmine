@@ -87,6 +87,7 @@ const DataPegawai = () => {
               <th>Divisi</th>
               <th>Jabatan</th>
               <th>Gaji Jabatan</th>
+              <th>Aksi</th>
             </tr>
           </thead>
           <tbody>

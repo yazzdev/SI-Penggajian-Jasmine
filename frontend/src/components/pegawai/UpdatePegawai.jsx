@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Button, Form, Card } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
+import '../Tables.css';
 
 const UpdatePegawai = () => {
   const { nip } = useParams();
@@ -93,9 +94,9 @@ const UpdatePegawai = () => {
         <Row className="g-0">
           <Col md="6">
             <Card.Body className="d-flex flex-column">
-              <h2 className="mb-3 ps-5 pb-3" style={{ fontWeight: "bold" }}>
+              <h5 className="mb-3 ps-5 pb-3">
                 Update Data Pegawai
-              </h2>
+              </h5>
               <Form className="mb-4 mx-5" onSubmit={handleSubmit}>
                 <Form.Group className="my-4" controlId="formBasicEmail">
                   <Form.Label>NIP</Form.Label>
@@ -121,9 +122,9 @@ const UpdatePegawai = () => {
           </Col>
           <Col md="6">
             <Card.Body className="d-flex flex-column">
-              <h2 className="mb-3 ps-5 pb-3 text-white" style={{ fontWeight: "bold" }}>
+              <h5 className="mb-3 ps-5 pb-3 text-hide">
                 Test
-              </h2>
+              </h5>
               <Form className="mb-4 mx-5" onSubmit={handleSubmit}>
                 <Form.Group className="my-4" controlId="formBasicEmail">
                   <Form.Label>Bank</Form.Label>

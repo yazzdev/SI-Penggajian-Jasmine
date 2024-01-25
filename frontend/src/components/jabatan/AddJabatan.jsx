@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Container, Row, Col, Button, Form, Card, } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import "../Tables.css";
 
 function AddJabatan() {
 
@@ -67,9 +68,9 @@ function AddJabatan() {
         <Row className="g-0">
           <Col md="6">
             <Card.Body className="d-flex flex-column">
-              <h2 className="mb-3 ps-5 pb-3" style={{ fontWeight: "bold" }}>
+              <h5 className="mb-3 ps-5 pb-3">
                 Tambah Data Jabatan
-              </h2>
+              </h5>
               <Form className="mb-4 mx-5" onSubmit={onSubmit}>
                 <Form.Group className="my-4" controlId="formBasicEmail">
                   <Form.Label>Nama Divisi</Form.Label>

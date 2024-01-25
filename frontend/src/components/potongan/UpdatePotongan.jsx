@@ -3,6 +3,7 @@ import axios from "axios";
 import { Container, Row, Col, Button, Form, Card } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
+import '../Tables.css';
 
 const UpdatePotongan = () => {
   const { id } = useParams();
@@ -75,9 +76,9 @@ const UpdatePotongan = () => {
         <Row className="g-0">
           <Col md="6">
             <Card.Body className="d-flex flex-column">
-              <h4 className="mt-3 ps-5 pb-3" style={{ fontWeight: "bold" }}>
+              <h5 className="mt-3 ps-5 pb-3">
                 Update Data Potongan "{potongan?.pegawai?.nama_pegawai}"
-              </h4>
+              </h5>
               <Form className="mb-4 mx-5" onSubmit={handleSubmit}>
                 <Form.Group className="my-4" controlId="formBasicEmail">
                   <Form.Label>Makan</Form.Label>
@@ -98,9 +99,9 @@ const UpdatePotongan = () => {
           </Col>
           <Col md="6">
             <Card.Body className="d-flex flex-column">
-              <h4 className="mt-3 ps-5 pb-3 text-white" style={{ fontWeight: "bold" }}>
+              <h5 className="mt-3 ps-5 pb-3 text-hide">
                 Update Data Potongan
-              </h4>
+              </h5>
               <Form className="mb-4 mx-5" onSubmit={handleSubmit}>
               <Form.Group className="my-4" controlId="formBasicEmail">
                 <Form.Label>Transport</Form.Label>
