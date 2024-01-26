@@ -84,7 +84,7 @@ const DataPegawai = () => {
         </Button>
       </div>
 
-      <div className="table-responsive">
+      <div className="table-responsive" style={{ maxHeight: "610px", overflowY: "auto" }}>
         <table className="table table-bordered table-hover">
           <thead>
             <tr>

@@ -38,7 +38,7 @@ const DataTunjangan = () => {
 
   function capitalizeEachWord(str) {
     return str.replace(/\b\w/g, (match) => match.toUpperCase());
-  } 
+  }
 
   useEffect(() => {
     fetchData();
@@ -50,7 +50,7 @@ const DataTunjangan = () => {
         <h5>Data Tunjangan</h5>
       </div>
 
-      <div className="table-responsive">
+      <div className="table-responsive" style={{ maxHeight: "610px", overflowY: "auto" }}>
         <table className="table table-bordered table-hover">
           <thead>
             <tr>

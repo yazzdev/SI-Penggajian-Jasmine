@@ -1,0 +1,237 @@
+[
+  {
+    "nama_divisi": "Manajemen",
+    "nama_jabatan": "Direktur Utama",
+    "biaya_jabatan": 9200000
+  },
+  {
+    "nama_divisi": "Manajemen",
+    "nama_jabatan": "Komisaris & PJ Klinik",
+    "biaya_jabatan": 4000000
+  },
+  {
+    "nama_divisi": "Manajemen",
+    "nama_jabatan": "Direktur Umum",
+    "biaya_jabatan": 8400000
+  },
+  {
+    "nama_divisi": "Pelayanan Medis",
+    "nama_jabatan": "Direktur Medis",
+    "biaya_jabatan": 6450000
+  },
+  {
+    "nama_divisi": "Pelayanan Medis",
+    "nama_jabatan": "Wakil Direktur Medis",
+    "biaya_jabatan": 2000000
+  },
+  {
+    "nama_divisi": "Manajemen",
+    "nama_jabatan": "Manajer QC & HRD (Pjs)",
+    "biaya_jabatan": 4720000
+  },
+  {
+    "nama_divisi": "Promosi Kesehatan",
+    "nama_jabatan": "SPV HR Admin",
+    "biaya_jabatan": 1595000
+  },
+  {
+    "nama_divisi": "Manajemen",
+    "nama_jabatan": "Corporate Secretary",
+    "biaya_jabatan": 1907380
+  },
+  {
+    "nama_divisi": "Finance, tax & accounting",
+    "nama_jabatan": "Akunting",
+    "biaya_jabatan": 1807380
+  },
+  {
+    "nama_divisi": "Finance, tax & accounting",
+    "nama_jabatan": "Admin Keuangan",
+    "biaya_jabatan": 1350000
+  },
+  {
+    "nama_divisi": "Finance, tax & accounting",
+    "nama_jabatan": "SPV Finance",
+    "biaya_jabatan": 2500000
+  },
+  {
+    "nama_divisi": "Promosi Kesehatan",
+    "nama_jabatan": "Manajer Promkes",
+    "biaya_jabatan": 2000000
+  },
+  {
+    "nama_divisi": "Pelayanan Medis",
+    "nama_jabatan": "Bidan MCO",
+    "biaya_jabatan": 1435000
+  },
+  {
+    "nama_divisi": "Pelayanan Medis",
+    "nama_jabatan": "Digital Marketing",
+    "biaya_jabatan": 1760000
+  },
+  {
+    "nama_divisi": "Promosi Kesehatan",
+    "nama_jabatan": "Kasir",
+    "biaya_jabatan": 1500000
+  },
+  {
+    "nama_divisi": "Promosi Kesehatan",
+    "nama_jabatan": "Front Office",
+    "biaya_jabatan": 1500000
+  },
+  {
+    "nama_divisi": "Promosi Kesehatan",
+    "nama_jabatan": "Rekam Medis",
+    "biaya_jabatan": 1350000
+  },
+  {
+    "nama_divisi": "Promosi Kesehatan",
+    "nama_jabatan": "SPV Kasir & Finance",
+    "biaya_jabatan": 1807380
+  },
+  {
+    "nama_divisi": "Promosi Kesehatan",
+    "nama_jabatan": "Front Office",
+    "biaya_jabatan": 1500000
+  },
+  {
+    "nama_divisi": "General Affair",
+    "nama_jabatan": "Cleaning Service",
+    "biaya_jabatan": 1250000
+  },
+  {
+    "nama_divisi": "General Affair",
+    "nama_jabatan": "Security",
+    "biaya_jabatan": 1500000
+  },
+  {
+    "nama_divisi": "General Affair",
+    "nama_jabatan": "Screening & Umum",
+    "biaya_jabatan": 1250000
+  },
+  {
+    "nama_divisi": "General Affair",
+    "nama_jabatan": "GA & Ekspedisi",
+    "biaya_jabatan": 2000000
+  },
+  {
+    "nama_divisi": "General Affair",
+    "nama_jabatan": "Manajer General Affair",
+    "biaya_jabatan": 2250000
+  },
+  {
+    "nama_divisi": "General Affair",
+    "nama_jabatan": "PJ General Affair",
+    "biaya_jabatan": 1350000
+  },
+  {
+    "nama_divisi": "General Affair",
+    "nama_jabatan": "PJ Ambulance & Security",
+    "biaya_jabatan": 2360000
+  },
+  {
+    "nama_divisi": "General Affair",
+    "nama_jabatan": "Security",
+    "biaya_jabatan": 1300000
+  },
+  {
+    "nama_divisi": "General Affair",
+    "nama_jabatan": "Rumah Tangga & Umum",
+    "biaya_jabatan": 1350000
+  },
+  {
+    "nama_divisi": "General Affair",
+    "nama_jabatan": "Cleaning Service & Umum",
+    "biaya_jabatan": 1250000
+  },
+  {
+    "nama_divisi": "Pelayanan Medis",
+    "nama_jabatan": "SPV Ahli Gizi",
+    "biaya_jabatan": 1800000
+  },
+  {
+    "nama_divisi": "Pelayanan Medis",
+    "nama_jabatan": "Asisten Ahli Gizi",
+    "biaya_jabatan": 1522000
+  },
+  {
+    "nama_divisi": "General Affair",
+    "nama_jabatan": "Laundry",
+    "biaya_jabatan": 1500000
+  },
+  {
+    "nama_divisi": "Pelayanan Medis",
+    "nama_jabatan": "Chef & Dapur",
+    "biaya_jabatan": 2500000
+  },
+  {
+    "nama_divisi": "Pelayanan Medis",
+    "nama_jabatan": "SPV Bidan",
+    "biaya_jabatan": 2600000
+  },
+  {
+    "nama_divisi": "Pelayanan Medis",
+    "nama_jabatan": "Bidan Ranap PJ",
+    "biaya_jabatan": 1522200
+  },
+  {
+    "nama_divisi": "Pelayanan Medis",
+    "nama_jabatan": "Bidan Ranap",
+    "biaya_jabatan": 1910000
+  },
+  {
+    "nama_divisi": "Pelayanan Medis",
+    "nama_jabatan": "Bidan Poli PJ",
+    "biaya_jabatan": 1600000
+  },
+  {
+    "nama_divisi": "Pelayanan Medis",
+    "nama_jabatan": "SPV Perawat",
+    "biaya_jabatan": 1800000
+  },
+  {
+    "nama_divisi": "Pelayanan Medis",
+    "nama_jabatan": "Bidan",
+    "biaya_jabatan": 1500000
+  },
+  {
+    "nama_divisi": "Pelayanan Medis",
+    "nama_jabatan": "Bidan Ranap",
+    "biaya_jabatan": 1500000
+  },
+  {
+    "nama_divisi": "Pelayanan Medis",
+    "nama_jabatan": "Bidan Poli",
+    "biaya_jabatan": 1500000
+  },
+  {
+    "nama_divisi": "Pelayanan Medis",
+    "nama_jabatan": "Bidan / MCO Anak",
+    "biaya_jabatan": 1500000
+  },
+  {
+    "nama_divisi": "Pelayanan Medis",
+    "nama_jabatan": "Bidan",
+    "biaya_jabatan": 1500000
+  },
+  {
+    "nama_divisi": "Pelayanan Medis",
+    "nama_jabatan": "Apoteker PJ Farmasi",
+    "biaya_jabatan": 2250000
+  },
+  {
+    "nama_divisi": "Pelayanan Medis",
+    "nama_jabatan": "Apoteker Pendamping",
+    "biaya_jabatan": 2175000
+  },
+  {
+    "nama_divisi": "Penunjang Medis",
+    "nama_jabatan": "Ast. Apoteker",
+    "biaya_jabatan": 2000000
+  },
+  {
+    "nama_divisi": "Laboratorium",
+    "nama_jabatan": "Admin Ranap & VI Casemix BPJS",
+    "biaya_jabatan": 1350000
+  }
+]
