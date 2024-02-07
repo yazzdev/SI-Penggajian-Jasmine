@@ -12,16 +12,30 @@ module.exports = {
             model: Pegawai,
             as: 'pegawai',
             attributes: {
-              exclude: ['id', 'nip','id_jabatan','createdAt', 'updatedAt']
+              exclude: ['id', 'nip', 'id_jabatan', 'createdAt', 'updatedAt']
             },
             include: [
               {
                 model: Jabatan,
                 as: 'jabatan',
                 attributes: {
-                  exclude: ['id','createdAt', 'updatedAt']
+                  exclude: ['id', 'createdAt', 'updatedAt']
                 },
               },
+              {
+                model: Tunjangan,
+                as: 'tunjangan',
+                attributes: {
+                  exclude: ['id', 'nip_pegawai', 'createdAt', 'updatedAt']
+                },
+              },
+              {
+                model: Potongan,
+                as: 'potongan',
+                attributes: {
+                  exclude: ['id', 'nip_pegawai', 'createdAt', 'updatedAt']
+                },
+              }
             ]
           }
         ]

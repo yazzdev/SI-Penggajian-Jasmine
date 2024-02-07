@@ -21,6 +21,14 @@ const Sidebar = () => {
     }
   };
 
+  // Fungsi logout
+  const handleLogout = () => {
+    // Hapus token dari local storage atau dari tempat penyimpanan yang sesuai
+    localStorage.removeItem('token');
+    // Redirect ke halaman login
+    navigate('/');
+  };
+
   return (
     <>
       <div className="bars" style={expanded ? { left: '60%' } : { left: '5%' }} onClick={() => setExpanded(!expanded)}>
@@ -43,7 +51,7 @@ const Sidebar = () => {
           {SidebarData.map((item, index) => {
             return (
               <div
-                className={`menuItem ${location.pathname ===  item.link ? "active" : ""}`}
+                className={`menuItem ${location.pathname === item.link ? "active" : ""}`}
                 key={index}
                 onClick={() => {
                   setExpanded(false);
@@ -57,7 +65,7 @@ const Sidebar = () => {
             );
           })}
           {/* signoutIcon */}
-          <div className="menuItem">
+          <div className="menuItem" onClick={handleLogout}>
             <UilSignOutAlt />
           </div>
         </div>

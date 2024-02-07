@@ -34,20 +34,24 @@ function Login() {
       const { token } = response.data.data;
       localStorage.setItem("Authorization", token);
 
-      // Check if the entered username and password are "admin"
-      if (username === "admin" && password === "admin") {
-        // Redirect to /update
-        toast.success(response.data.message);
-        setTimeout(() => {
-          window.location.href = "/update";
-        }, 2000);
-      } else {
-        // Redirect to /dashboard
-        toast.success(response.data.message);
+      // // Check if the entered username and password are "admin"
+      // if (username === "admin" && password === "admin") {
+      //   // Redirect to /update
+      //   toast.success(response.data.message);
+      //   setTimeout(() => {
+      //     window.location.href = "/update";
+      //   }, 2000);
+      // } else {
+      //   // Redirect to /dashboard
+      //   toast.success(response.data.message);
+      //   setTimeout(() => {
+      //     window.location.href = "/dashboard";
+      //   }, 2000);
+      // }
+      toast.success(response.data.message);
         setTimeout(() => {
           window.location.href = "/dashboard";
         }, 2000);
-      }
 
     } catch (error) {
       if (axios.isAxiosError(error)) {

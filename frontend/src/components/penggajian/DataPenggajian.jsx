@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import DetailPenggajian from "./DetailPenggajian";
-import { Container, Modal } from "react-bootstrap";
+import { Container, Modal, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import * as XLSX from "xlsx";
 
 const DataPenggajian = () => {
   const [selectedId, setSelectedId] = useState(null);
@@ -35,6 +36,9 @@ const DataPenggajian = () => {
   };
 
   function capitalizeEachWord(str) {
+    if (typeof str !== 'string') {
+      return str;
+    }
     return str.replace(/\b\w/g, (match) => match.toUpperCase());
   }
 
@@ -42,10 +46,43 @@ const DataPenggajian = () => {
     fetchData();
   }, []);
 
+  const exportToExcel = () => {
+    const fileName = "Data_Penggajian.xlsx";
+    const dataToExport = penggajianData.map((item) => ({
+      NIP: item?.nip_pegawai,
+      Nama: capitalizeEachWord(item?.pegawai?.nama_pegawai),
+      Divisi: capitalizeEachWord(item?.pegawai?.jabatan?.nama_divisi),
+      Jabatan: capitalizeEachWord(item?.pegawai?.jabatan?.nama_jabatan),
+      "Gaji Jabatan": capitalizeEachWord(item?.pegawai?.jabatan?.biaya_jabatan),
+      "Tanggal Masuk": (item?.pegawai?.tgl_masuk),
+      "Gaji Pokok": (item?.pegawai?.gaji_pokok),
+      "Tunjangan Transport": (item?.pegawai?.tunjangan?.transport),
+      "Tunajangan Makan": (item?.pegawai?.tunjangan?.makan),
+      "Tunjangan Komunikasi": (item?.pegawai?.tunjangan?.komunikasi),
+      "Tunjangan Keahlian": (item?.pegawai?.tunjangan?.keahlian),
+      "Total Gaji": item?.total_gaji,
+      "Potongan Makan": (item?.pegawai?.potongan?.makan),
+      "Potongan Zakat": (item?.pegawai?.potongan?.zakat),
+      "Potongan Absensi": (item?.pegawai?.potongan?.absensi),
+      "Potongan Transport": (item?.pegawai?.potongan?.transport),
+      "Potongan Pinjaman": (item?.pegawai?.potongan?.pinjaman_pegawai),
+      "Potongan Lain-Lain": (item?.pegawai?.potongan?.lain_lain),
+      "Total Potongan": item?.total_potongan,
+      Bank: item?.pegawai?.bank,
+      NoRekening: item?.pegawai?.no_rekening,
+    }));
+
+    const worksheet = XLSX.utils.json_to_sheet(dataToExport);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Data Penggajian");
+    XLSX.writeFile(workbook, fileName);
+  };
+
   return (
     <Container fluid>
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h5>Data Penggajian</h5>
+        <Button variant="success" onClick={exportToExcel}>Export to Excel</Button>
       </div>
 
       <div className="table-responsive" style={{ maxHeight: "610px", overflowY: "auto" }}>
